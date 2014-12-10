@@ -1,18 +1,27 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    encrypt = require('../utilities/encryption');
 
 var userSchema = mongoose.Schema({
-    username: String,
-    password: String
+    username: {type: String, required: '{PATH} is required', unique: true},
+    firstName: {type: String, required: '{PATH} is required'},
+    hashedPwd: {type: String, required: '{PATH} is required'},
+    salt: {type: String, required: '{PATH} is required'}
 });
+
+userSchema.methods = {
+    authenticate: function(pwdEntered){
+        return encrypt.hashedPwd(this.salt, pwdEntered) === this.hashedPwd;
+    }
+};
 
 var User = mongoose.model('User', userSchema);
 
-function createDefaultUsers(){
+exports.createDefaultUsers = function(){
     User.find({}).exec(function(err, collection){
         if(collection.length === 0){
-            User.create({username: '1', password: '123'});
+            var salt = encrypt.createSalt();
+            var hash = encrypt.hashedPwd(salt, '123');
+            User.create({username: '1', salt: salt, hashedPwd: hash});
         }
     })
-}
-
-exports.createDefaultUsers = createDefaultUsers;
+};

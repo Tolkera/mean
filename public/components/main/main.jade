@@ -1,2 +1,13 @@
-form.registration-form
-    input
+div(ng-controller="mvLoginCtrl")
+    form.registration-form(ng-hide="identity.isAuthenticated()")
+        a(href="/register") Sign up
+        label(for="username") User name
+        input(type="text", name="username", id="username", ng-model="username")
+        label(for="password") Password
+        input(type="password", name="password", id="password", ng-model="password")
+        button.btn.btn--primary.btn--attention.form__login-btn(ng-click="login(username, password)") Log in
+    div(ng-show="identity.isAuthenticated()")
+        div Welcome {{identity.currentUser.firstName}}
+        a(href="" ng-click="logout()") Sign out
+        br
+        a(href="/profile") Edit profile

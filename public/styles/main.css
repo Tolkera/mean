@@ -1,5 +1,48 @@
 .registration-form {
-  background: blue;
+  width: 300px;
+  margin: 50px auto;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 5px;
+  height: 30px;
+}
+
+.btn {
+  border-radius: 5px;
+  border: 0;
+  outline: none;
+}
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn--primary {
+  padding: 10px 30px;
+  font-size: 20px;
+}
+
+.btn--attention {
+  background: forestgreen;
+  color: #fff;
+}
+.btn--attention:hover {
+  background: #1d771d;
+}
+.btn--attention:active {
+  background: #186218;
+}
+
+.form__login-btn {
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=main.css.map */

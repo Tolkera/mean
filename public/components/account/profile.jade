@@ -1,0 +1,9 @@
+form.registration-form(novalidate, name="profileForm")
+    label(for="username") User name
+    input(type="text", name="username", id="username", ng-model="username", required)
+    label(for="username") First name
+    input(type="text", name="firstName", id="firstName", ng-model="firstName", required)
+    label(for="password") Password
+    input(type="password", name="password", id="password", ng-model="password")
+    button.btn.btn--primary.btn--attention.form__login-btn(ng-click="update()", ng-disabled="profileForm.$invalid") Save
+    a.btn.btn--primary.form__login-btn(href="/") Cancel
