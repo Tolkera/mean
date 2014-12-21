@@ -9,7 +9,6 @@ describe('mvAuth', function(){
         userFactory = $injector.get('mvUser');
     }));
 
-
     afterEach(function() {
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();

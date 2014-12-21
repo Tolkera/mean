@@ -12,4 +12,4 @@ module.exports = {
         db: 'mongodb://gmot:gmot2@ds053310.mongolab.com:53310/gmot',
         port: process.env.PORT || 80
     }
-}
+};

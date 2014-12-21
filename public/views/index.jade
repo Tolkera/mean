@@ -7,4 +7,7 @@ html
         include ../includes/scripts
     body(ng-app="app")
         include ../includes/currentUser
+        div(ng-controller="mvLoginCtrl")
+            a.nav-item(href="/") Home
+            a.nav-item(href="/courses", ng-show="identity.isAuthenticated()") Courses
         div(ng-view)

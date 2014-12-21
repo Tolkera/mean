@@ -5,7 +5,8 @@ var userSchema = mongoose.Schema({
     username: {type: String, required: '{PATH} is required', unique: true},
     firstName: {type: String, required: '{PATH} is required'},
     hashedPwd: {type: String, required: '{PATH} is required'},
-    salt: {type: String, required: '{PATH} is required'}
+    salt: {type: String, required: '{PATH} is required'},
+    courses: [String]
 });
 
 userSchema.methods = {

@@ -8,12 +8,13 @@ describe('mvIndentity', function(){
         window = $injector.get('$window');
     }));
 
-/*    describe('mvIdentity', function(){
-        it(' should create a new identity if there is a bootstrapped user', function(){
+    describe('mvIdentity', function(){
+/*        it(' should create a new identity if there is a bootstrapped user', function(){
+            var currentUser;
             window.bootstrappedUserObject = {username: 'ben'};
-            var a = identity.currentUser;
-            expect(identity.currentUser.username).toEqual(new userFactory());
-        });
+            currentUser = window.bootstrappedUserObject;
+            expect(identity).toEqual('ben');
+        });*/
 
-    });*/
+    });
 });

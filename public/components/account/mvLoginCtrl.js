@@ -1,11 +1,12 @@
-angular.module('app').controller('mvLoginCtrl', function($scope, $http, $location, mvNotifier, mvIdentity, mvAuth){
+angular.module('app').controller('mvLoginCtrl', function($scope, mvAuth, $http, $location, mvNotifier, mvIdentity){
     $scope.identity = mvIdentity;
+
     $scope.login = function(username, password){
         mvAuth.authenticateUser(username, password).then(function(success){
             if (success) {
-                mvNotifier.notify('you logged in');
+               mvNotifier.notify('You logged in!');
             } else {
-                mvNotifier.error('incorrect!');
+                mvNotifier.error('Incorrect!');
             }
         });
     };

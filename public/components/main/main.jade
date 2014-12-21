@@ -7,7 +7,12 @@ div(ng-controller="mvLoginCtrl")
         input(type="password", name="password", id="password", ng-model="password")
         button.btn.btn--primary.btn--attention.form__login-btn(ng-click="login(username, password)") Log in
     div(ng-show="identity.isAuthenticated()")
-        div Welcome {{identity.currentUser.firstName}}
-        a(href="" ng-click="logout()") Sign out
-        br
-        a(href="/profile") Edit profile
+        nav.meta-nav
+        a.secondary-nav-item(href="" ng-click="logout()") Sign out
+        a.secondary-nav-item(href="/profile") Edit profile
+        h1.welcome-message Welcome {{identity.currentUser.firstName}}
+
+
+div(ng-controller="mvMainCtrl")
+    ul
+        li(ng-repeat="course in courses") {{course.title}}

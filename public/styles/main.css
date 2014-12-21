@@ -45,4 +45,36 @@ input {
   margin-top: 20px;
 }
 
+.nav-item {
+  background: green;
+  display: inline-block;
+  padding: 10px 20px;
+  margin-right: 20px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+}
+.nav-item:hover {
+  background: #009a00;
+}
+.nav-item:active {
+  background: #00b300;
+}
+
+.welcome-message {
+  text-align: center;
+  font-size: 30px;
+}
+
+.secondary-nav-item {
+  display: block;
+  margin-top: 10px;
+  color: green;
+  text-decoration: none;
+}
+
+.meta-nav {
+  margin-top: 30px;
+}
+
 /*# sourceMappingURL=main.css.map */
