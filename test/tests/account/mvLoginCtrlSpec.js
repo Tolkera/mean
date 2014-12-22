@@ -1,13 +1,13 @@
 describe('mvLoginCtrl', function(){
-    var scope, ctrl, identity, q, mockNotifier, mockAuthService, deferred, timeout, location;
+    var scope, ctrl, identity, q, mockNotifier, mockAuthService, deferred, location;
 
     beforeEach(module('app'));
 
-    beforeEach(inject(function($injector, $rootScope, $controller, $q, mvAuth, mvNotifier, $location) {
-        q = $q;
+    beforeEach(inject(function($injector, $rootScope, $controller) {
+        q = $injector.get('$q');
         scope = $rootScope.$new();
-        mockAuthService = mvAuth;
-        mockNotifier = mvNotifier;
+        mockAuthService = $injector.get('mvAuth');
+        mockNotifier =  $injector.get('mvNotifier');
         ctrl = $controller('mvLoginCtrl', { $scope: scope});
         identity =  $injector.get('mvIdentity');
         location = $injector.get('$location');

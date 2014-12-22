@@ -63,7 +63,7 @@ describe('mvAuth', function(){
             expect(authFactory.createUser).toBeDefined();
         });
 
-        it('should update user', function(){
+        it('should create a user', function(){
             authFactory.createUser({username: 'ben', firstName: 'bill'});
             $httpBackend.expect('POST', '/api/users').respond();
             $httpBackend.flush();

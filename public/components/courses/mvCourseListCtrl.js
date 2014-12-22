@@ -2,8 +2,6 @@ angular.module('app').controller('mvCourseListCtrl', function($scope, mvCachedCo
     $scope.courses = mvCachedCourse.query();
     $scope.userCourses = mvIdentity.currentUser.courses;
 
-    console.log($scope.userCourses);
-
     $scope.sortOptions = [
         {value: 'title', text: 'Sort by Title'},
         {value: 'published', text: 'Sort by Published date'}
@@ -19,7 +17,7 @@ angular.module('app').controller('mvCourseListCtrl', function($scope, mvCachedCo
         };
 
         mvAuth.updateCurrentUser(coursesAdded).then(function(){
-            mvNotifier.notify('New course is saved')
+            mvNotifier.notify('Your new course is saved')
         }, function(reason){
             mvNotifier.error(reason)
         });

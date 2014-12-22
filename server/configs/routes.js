@@ -12,6 +12,7 @@ module.exports = function(app){
     app.get('/api/courses', courses.getCourses);
     app.get('/api/courses/:id', courses.getCourseDetails);
 
+
     app.post('/login', auth.authenticate);
     app.post('/logout', function(req, res){
         req.logout();
@@ -23,9 +24,18 @@ module.exports = function(app){
     });
 
     app.get('*', function(req, res){
-        res.render('index', {
-            bootstrappedUser: req.user
-        })
+        if(req.user) {
+            res.render('index', {
+                bootstrappedUser: {
+                    _id: req.user._id,
+                    username: req.user.username,
+                    firstName: req.user.firstName,
+                    courses: req.user.courses
+                }
+            })
+        } else {
+            res.render('index')
+        }
     });
 };
 

@@ -8,10 +8,10 @@ angular.module('app').controller('mvRegisterCtrl', function($scope, mvAuth, mvNo
         };
 
         mvAuth.createUser(newUser).then(function(){
-            mvNotifier.notify('you have just registered');
+            mvNotifier.notify('You have just registered');
             $location.path('/')
         }, function(err){
             mvNotifier.error(err)
         });
     }
-})
+});
