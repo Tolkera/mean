@@ -1,6 +1,8 @@
-h1 {{course.title}}
-h3(ng-show="course.featured") Featured
-h3 Published on {{course.published | date}}
+div.container
+    h1 {{course.title}}
+    h3(ng-show="course.featured") Featured
+    h3 Published on {{course.published | date}}
 
-div.tags
-    div(ng-repeat="tag in course.tags") {{tag}}
+    div.tags
+        div(ng-repeat="tag in course.tags") {{tag}}
+

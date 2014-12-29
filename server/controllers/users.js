@@ -22,7 +22,6 @@ exports.createUser = function(req, res, next){
     })
 };
 
-
 exports.updateUser = function(req, res, next){
    var userUpdates = req.body;
 
@@ -33,7 +32,7 @@ exports.updateUser = function(req, res, next){
 
     req.user.firstName = userUpdates.firstName;
     req.user.username = userUpdates.username;
-    req.user.courses = userUpdates.courses;
+    req.user.tasks = userUpdates.tasks;
 
     if(userUpdates.password && userUpdates.password.length > 0){
         req.user.salt = encrypt.createSalt();
@@ -48,4 +47,4 @@ exports.updateUser = function(req, res, next){
             res.send(req.user)
         }
     })
-}
+};

@@ -1,35 +1,30 @@
+$mobile: 768px;
+$tablet: 1200px;
+
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500);
+$color-attention: #872D62;
+$color-background: #B8B8B8;
+$color-branding--dark: #0A4700;
+$color-branding--light: #138F00;
+$font-ordinary: 'Roboto', sans-serif;
+$font-heading: 'Oswald', sans-serif;
+
+//3C8D2F
+
+@import "components/normalize";
+@import "components/base";
+@import "components/utils";
+@import 'components/header';
+@import "components/toastr";
 @import 'components/form';
-
-.nav-item {
-  background: green;
-  display: inline-block;
-  padding: 10px 20px;
-  margin-right: 20px;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 3px;
-
-  &:hover {
-    background: lighten(green, 5%);
-  }
-
-  &:active {
-    background: lighten(green, 10%);
-  }
-}
-
-.welcome-message {
-  text-align: center;
-  font-size: 30px;
-}
-
-.secondary-nav-item {
-  display: block;
-  margin-top: 10px;
-  color: green;
-  text-decoration: none;
-}
-
-.meta-nav {
-  margin-top: 30px;
-}
+@import "components/icon";
+@import "components/common";
+@import "components/button";
+@import "components/nav";
+@import "components/task-filter-controls";
+@import "components/task";
+@import "components/heading";
+@import "components/about";
+@import "components/login-form";
+@import "components/registration-form";

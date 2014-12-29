@@ -12,7 +12,6 @@ module.exports = function(app){
     app.get('/api/courses', courses.getCourses);
     app.get('/api/courses/:id', courses.getCourseDetails);
 
-
     app.post('/login', auth.authenticate);
     app.post('/logout', function(req, res){
         req.logout();
@@ -30,7 +29,8 @@ module.exports = function(app){
                     _id: req.user._id,
                     username: req.user.username,
                     firstName: req.user.firstName,
-                    courses: req.user.courses
+                    courses: req.user.courses,
+                    tasks: req.user.tasks
                 }
             })
         } else {

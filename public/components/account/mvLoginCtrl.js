@@ -5,6 +5,7 @@ angular.module('app').controller('mvLoginCtrl', function($scope, mvAuth, $http, 
         mvAuth.authenticateUser(username, password).then(function(success){
             if (success) {
                mvNotifier.notify('You logged in!');
+                $location.path('/tasks');
             } else {
                 mvNotifier.error('Incorrect!');
             }
@@ -18,5 +19,9 @@ angular.module('app').controller('mvLoginCtrl', function($scope, mvAuth, $http, 
             mvNotifier.notify('You signed out');
             $location.path('/');
         })
+    };
+
+    $scope.isNavActive = function(data){
+        return $location.path() == data
     }
 });

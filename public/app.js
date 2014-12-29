@@ -1,4 +1,4 @@
-angular.module('app',['ngResource', 'ngRoute'] );
+angular.module('app',['ngResource', 'ngRoute', 'ngMessages'] );
 
 angular.module('app').config(function($routeProvider, $locationProvider){
 
@@ -15,6 +15,9 @@ angular.module('app').config(function($routeProvider, $locationProvider){
     $routeProvider
         .when('/',{
             templateUrl: '/components/main/main',
+        })
+        .when('/about',{
+            templateUrl: '/components/main/about',
         })
         .when('/register',{
             templateUrl: '/components/account/register',
@@ -35,6 +38,13 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             controller: 'mvCourseDetailsCtrl',
             resolve: routeRoleChecker.user
         })
+
+        .when('/tasks',{
+            templateUrl: '/components/tasks/task-list',
+            controller: 'mvTaskListCtrl',
+            resolve: routeRoleChecker.user
+        })
+
 });
 
 

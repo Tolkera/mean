@@ -2,12 +2,29 @@ doctype html
 html
     head
         title Gmot
-        link(rel="stylesheet", href="/vendor/toastr/toastr.css")
         link(rel="stylesheet", href="/styles/main.css")
         include ../includes/scripts
     body(ng-app="app")
         include ../includes/currentUser
-        div(ng-controller="mvLoginCtrl")
-            a.nav-item(href="/") Home
-            a.nav-item(href="/courses", ng-show="identity.isAuthenticated()") Courses
+
+        header.app-header(ng-controller="mvLoginCtrl")
+            div.container.cf
+                ul.main-nav.app-header__main-nav
+                    li.main-nav__item
+                        a.nav-link(href="/", ng-class="{'btn--attention': isNavActive('/')}") Home
+                    li.main-nav__item
+                        a.nav-link(href="/about", ng-class="{'btn--attention': isNavActive('/about')}") About
+                    li.main-nav__item(ng-show="identity.isAuthenticated()")
+                        a.nav-link(href="/tasks", ng-class="{'btn--attention': isNavActive('/tasks')}") Tasks
+
+                div.user-nav-wrap(ng-show="!identity.isAuthenticated()")
+                    a.meta-link(href="/register" ng-class="{'nav-link--active': isNavActive('/register')}") Sign up
+                div.meta-dropdown.user-nav-wrap(ng-show="identity.isAuthenticated()", outside-click)
+                    button.meta-dropdown__trigger.nav-link(ng-click="elemShown", ng-class="{'meta-dropdown--open': elemShown, 'nav-link--active': elemShown}") {{identity.currentUser.firstName}}
+                    ul.meta-dropdown__content.user-nav.app-header__user-nav(ng-show="elemShown")
+                        li.user-nav__item
+                            a.meta-nav-link(href="", ng-click="logout()") Sign out
+                        li.user-meta-nav__item
+                            a.meta-nav-link(href="/profile") Edit Profile
+
         div(ng-view)

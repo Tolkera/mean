@@ -1,18 +1,15 @@
-div(ng-controller="mvLoginCtrl")
-    form.registration-form(ng-hide="identity.isAuthenticated()")
-        a(href="/register") Sign up
-        label(for="username") User name
-        input(type="text", name="username", id="username", ng-model="username")
-        label(for="password") Password
-        input(type="password", name="password", id="password", ng-model="password")
-        button.btn.btn--primary.btn--attention.form__login-btn(ng-click="login(username, password)") Log in
+div.container(ng-controller="mvLoginCtrl")
+    form.login-form.form(ng-hide="identity.isAuthenticated()")
+        div.form-group.cf
+            label.form-group__label(for="username") User name
+            input.form-group__control.form-control(type="text", name="username", id="username", ng-model="username")
+        div.form-group.cf
+            label.form-group__label(for="password") Password
+            input.form-group__control.form-control(type="password", name="password", id="password", ng-model="password")
+        div.form-group
+            button.btn.btn-primary.btn--attention(ng-click="login(username, password)") Log in
+
     div(ng-show="identity.isAuthenticated()")
-        nav.meta-nav
-        a.secondary-nav-item(href="" ng-click="logout()") Sign out
-        a.secondary-nav-item(href="/profile") Edit profile
-        h1.welcome-message Welcome {{identity.currentUser.firstName}}
-
-
-div(ng-controller="mvMainCtrl")
-    ul
-        li(ng-repeat="course in courses") {{course.title}}
+        h1.message Welcome {{identity.currentUser.firstName}}!
+        p.message There is not much to do around on this page, sadly.
+        p.message Go create <a href="/tasks"> a new task </a> for yourself

@@ -1,9 +1,15 @@
-form.registration-form(novalidate, name="profileForm")
-    label(for="username") User name
-    input(type="text", name="username", id="username", ng-model="username", required)
-    label(for="username") First name
-    input(type="text", name="firstName", id="firstName", ng-model="firstName", required)
-    label(for="password") Password
-    input(type="password", name="password", id="password", ng-model="password")
-    button.btn.btn--primary.btn--attention.form__login-btn(ng-click="update()", ng-disabled="profileForm.$invalid") Save
-    a.btn.btn--primary.form__login-btn(href="/") Cancel
+form.registration-form.form(novalidate, name="profileForm")
+        div.form-group.cf
+            label.form-group__label(for="username") User name
+            input.form-group__control.form-control(type="text", name="username", id="username", ng-model="username", required)
+        div(ng-message="profileForm.username.$error")
+            span(ng-message="required") You did not enter a field
+        div.form-group.cf
+            label.form-group__label(for="username") First name
+            input.form-group__control.form-control(type="text", name="firstName", id="firstName", ng-model="firstName", required)
+        div.form-group.cf
+            label.form-group__label(for="password") Password
+            input.form-group__control.form-control(type="password", name="password", id="password", ng-model="password")
+        .form-group.cf
+            button.btn.btn-primary.btn--attention.registration-form__btn(ng-click="update()", ng-disabled="profileForm.$invalid") Save
+            a.registration-form__cancel-link.color--background(href="/") Cancel

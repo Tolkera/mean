@@ -1,0 +1,23 @@
+div.container
+    div.message(ng-show="!hasTasks") You've got no tasks! Lucky guy! Add one, please!
+    div.add-task-wrap
+    h2.heading-secondary.color--attention Add a task
+    form.add-task-form(name="addTaskForm")
+        input.form-control.add-task-form__input(ng-model="newTask", required)
+        button.btn.btn-secondary.btn--attention.add-task-form__btn(ng-click="addTask()", ng-disabled="addTaskForm.$invalid") Add
+    div
+        ul.tasks
+            li.task-item(ng-repeat="task in userTasks | filter: searchText | orderBy: sortOrder" , ng-class="{'task--done' : task.done, 'task__name--open' : elemShown}", ng-click="switchScope()", outside-click)
+                span.task__name(ng-hide="editing", ng-click="editing = !editing") {{task.name}}
+                    button.task__edit-icon.task__edit-icon--name( ng-hide="editing")
+                        span.icon-edit
+                form.task__edit-form(name="taskEditForm" , ng-show="editing", ng-submit="editing = false")
+                    input.form-control(ng-model="task.name", required)
+                    button.task__edit-icon(ng-click = "saveEditedTask(task)", type="submit", ng-disabled="taskEditForm.$invalid" )
+                       span.icon-tick
+                div.task__details.arrow_box(ng-show="elemShown")
+                    button.task__mark-done(ng-click="markDone(task)", ng-show="!task.done") Mark Done
+                    button.task__mark-done(ng-click="markUndone(task)", ng-show="task.done") Undo
+                    button.task__delete(ng-click="deleteTask($index)") Delete
+                    span.task__date Created on {{task.date |date }}
+

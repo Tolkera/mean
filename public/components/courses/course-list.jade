@@ -1,18 +1,18 @@
-input(ng-model="searchText", placeholder="Filter")
+div.container
+    div.filter-controls-wrap
+        input.input-control.form-control(ng-model="searchText", placeholder="Filter")
+        select.select-control.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+    ul.course-wrap
+       li(ng-repeat="course in courses | filter: searchText | orderBy: sortOrder")
+            a(href="/courses/{{course._id}}") {{course.title}}
+            div {{course.published | date}}
+            span(ng-repeat="tag in course.tags") {{tag}}
 
-select(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+    h2 Add a course
+    form.add-course
+        input(ng-model="courseInput")
+        button(ng-click="addCourse()") Add
 
-ul.course-wrap
-   li(ng-repeat="course in courses | filter: searchText | orderBy: sortOrder")
-        a(href="/courses/{{course._id}}") {{course.title}}
-        div {{course.published | date}}
-        span(ng-repeat="tag in course.tags") {{tag}}
-
-h2 Add a course
-form.add-course
-    input(ng-model="courseInput")
-    button(ng-click="addCourse()") Add
-
-div.coursesAdded
-    ul
-        li(ng-repeat="course in userCourses") {{course}}
+    div.coursesAdded
+        ul
+            li(ng-repeat="course in userCourses") {{course}}

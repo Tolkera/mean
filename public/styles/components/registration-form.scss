@@ -1,0 +1,19 @@
+.registration-form {
+  margin: 50px auto;
+}
+
+.registration-form__btn {
+  width: 70%;
+  float: left;
+}
+
+.registration-form__cancel-link {
+  float: right;
+  margin-top: 10px;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+    color: #555;
+  }
+}
