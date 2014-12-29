@@ -18,7 +18,7 @@
   right: -0.3em;
   top: -0.3em;
   float: right;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   color: #ffffff;
   -webkit-text-shadow: 0 1px 0 #ffffff;
@@ -67,12 +67,12 @@ button.toast-close-button {
   width: 100%;
 }
 .toast-top-left {
-  top: 5px;
-  left: 5px;
+  top: 12px;
+  left: 12px;
 }
 .toast-top-right {
-  top: 5px;
-  right: 5px;
+  top: 12px;
+  right: 12px;
 }
 .toast-bottom-right {
   right: 12px;
@@ -97,8 +97,8 @@ button.toast-close-button {
   position: relative;
   overflow: hidden;
   margin: 0 0 6px;
-  padding: 10px 10px 10px 50px;
-  min-width: 100px;
+  padding: 15px 15px 15px 50px;
+  width: 300px;
   -moz-border-radius: 3px 3px 3px 3px;
   -webkit-border-radius: 3px 3px 3px 3px;
   border-radius: 3px 3px 3px 3px;
@@ -111,7 +111,6 @@ button.toast-close-button {
   opacity: 0.8;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
   filter: alpha(opacity=80);
-  font-family: Oswald, sans-serif;
 }
 #toast-container > :hover {
   -moz-box-shadow: 0 0 12px #000000;
@@ -148,7 +147,7 @@ button.toast-close-button {
   background-color: #030303;
 }
 .toast-success {
-  background-color: #138F00;
+  background-color: #51a351;
 }
 .toast-error {
   background-color: #bd362f;
@@ -192,7 +191,7 @@ button.toast-close-button {
 }
 @media all and (min-width: 481px) and (max-width: 768px) {
   #toast-container > div {
-    padding: 10px 10px 10px 50px;
+    padding: 15px 15px 15px 50px;
     width: 25em;
   }
 }

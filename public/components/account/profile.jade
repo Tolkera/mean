@@ -2,11 +2,13 @@ form.registration-form.form(novalidate, name="profileForm")
         div.form-group.cf
             label.form-group__label(for="username") User name
             input.form-group__control.form-control(type="text", name="username", id="username", ng-model="username", required)
-        div(ng-message="profileForm.username.$error")
-            span(ng-message="required") You did not enter a field
+        div.form-error.form__error(ng-messages="profileForm.username.$error")
+            span(ng-message="required") This shouldn't be empty!
         div.form-group.cf
             label.form-group__label(for="username") First name
             input.form-group__control.form-control(type="text", name="firstName", id="firstName", ng-model="firstName", required)
+        div.form-error(ng-messages="profileForm.firstName.$error")
+            span(ng-message="required") This shouldn't be empty!
         div.form-group.cf
             label.form-group__label(for="password") Password
             input.form-group__control.form-control(type="password", name="password", id="password", ng-model="password")

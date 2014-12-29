@@ -12,9 +12,11 @@ div.container
                     button.task__edit-icon.task__edit-icon--name( ng-hide="editing")
                         span.icon-edit
                 form.task__edit-form(name="taskEditForm" , ng-show="editing", ng-submit="editing = false")
-                    input.form-control(ng-model="task.name", required)
+                    input.form-control(ng-model="task.name", name="taskName", required)
                     button.task__edit-icon(ng-click = "saveEditedTask(task)", type="submit", ng-disabled="taskEditForm.$invalid" )
                        span.icon-tick
+                    div.form-error(ng-messages="taskEditForm.taskName.$error")
+                        span(ng-message="required") This shouldn't be empty!
                 div.task__details.arrow_box(ng-show="elemShown")
                     button.task__mark-done(ng-click="markDone(task)", ng-show="!task.done") Mark Done
                     button.task__mark-done(ng-click="markUndone(task)", ng-show="task.done") Undo

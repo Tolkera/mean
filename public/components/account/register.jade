@@ -1,14 +1,14 @@
 div.container(ng-controller="mvRegisterCtrl")
     form.registration-form.form(ng-hide="identity.isAuthenticated()", novalidate, name="registrationForm")
         div.form-group.cf
-            label.form-group__label(for="username") User name
+            label.form-group__label.required-sign(for="username") User name
             input.form-group__control.form-control(type="text", name="username", id="username", ng-model="username", required)
         div.form-group.cf
-            label.form-group__label(for="username") First name
+            label.form-group__label.required-sign(for="username") First name
             input.form-group__control.form-control(type="text", name="firstName", id="firstName", ng-model="firstName", required)
         div.form-group.cf
-            label.form-group__label(for="password") Password
+            label.form-group__label.required-sign(for="password") Password
             input.form-group__control.form-control(type="password", name="password", id="password", ng-model="password", required)
-        .form-group.cf
+        div.form-group.cf
             button.btn.btn-primary.btn--attention.registration-form__btn(ng-click="register()", ng-disabled="registrationForm.$invalid") Sign up
             a.registration-form__cancel-link.color--background(href="/") Cancel

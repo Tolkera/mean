@@ -15,9 +15,8 @@
   &:focus {
     border-color: $color-branding--light;
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(19, 143, 0, .6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(19, 143, 0, .6);
-
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(135, 45, 98, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(135, 45, 98, .6);
   }
 }
 
@@ -52,4 +51,32 @@
     float: none;
     width: 100%;
   }
+}
+
+.form-error {
+  color: red;
+  font-size: 14px;
+}
+
+.form__error {
+  margin-bottom: 10px;
+}
+
+.btn[disabled] {
+  background: $color-background;
+
+  &:hover {
+    background: $color-background;
+  }
+}
+
+.required-sign {
+
+  &:after {
+    content: "*";
+    color: $color-attention;
+    display: inline-block;
+    margin-left: 5px;
+  }
+
 }
