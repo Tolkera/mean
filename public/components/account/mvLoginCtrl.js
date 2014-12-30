@@ -5,7 +5,7 @@ angular.module('app').controller('mvLoginCtrl', function($scope, mvAuth, $http, 
         mvAuth.authenticateUser(username, password).then(function(success){
             if (success) {
                mvNotifier.notify('You logged in!');
-                $location.path('/tasks');
+                $location.path('/');
             } else {
                 mvNotifier.error('Incorrect!');
             }
