@@ -1,6 +1,7 @@
 var auth = require('./auth'),
     users = require('../controllers/users'),
-    courses = require('../controllers/courses');
+    courses = require('../controllers/courses'),
+    tasks = require('../controllers/tasks');
 
 module.exports = function(app){
 
@@ -11,6 +12,11 @@ module.exports = function(app){
     app.put('/api/users', users.updateUser);
     app.get('/api/courses', courses.getCourses);
     app.get('/api/courses/:id', courses.getCourseDetails);
+    app.post('/api/tasks', tasks.createTask);
+    app.get('/api/tasks', tasks.getTasks);
+    app.put('/api/tasks', tasks.updateTask);
+    app.delete('/api/tasks', tasks.deleteTask);
+
 
     app.post('/login', auth.authenticate);
     app.post('/logout', function(req, res){

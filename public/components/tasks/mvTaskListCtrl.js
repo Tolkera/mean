@@ -1,6 +1,7 @@
-angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvIdentity, mvNotifier, $timeout){
-    $scope.userTasks = mvIdentity.currentUser.tasks;
-    $scope.hasTasks = ($scope.userTasks.length !== 0);
+angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvIdentity, mvNotifier, mvTaskOps, mvTask){
+    var userId = mvIdentity.currentUser._id;
+
+    $scope.userTasks = mvTask.query({userId: userId}, checkTasksNumber);
 
     var successMessages = [
         'Good job!',
@@ -13,44 +14,60 @@ angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvId
         'Congrats!'
     ];
 
+    function checkTasksNumber(){
+        $scope.hasTasks = ($scope.userTasks.length !== 0)
+    }
+
     $scope.randomizeMessage = function(){
         return successMessages[Math.floor(Math.random()*successMessages.length)]
     };
 
     $scope.addTask = function(){
+        var taskData = {name: $scope.newTask, date: new Date(), done: false, userId: userId};
         $scope.userTasks.push({name: $scope.newTask, date: new Date(), done: false});
         $scope.newTask = '';
-        updateData('Your new task is saved');
-    //    $scope.hasTasks = ($scope.userTasks.length !== 0);
+        mvTaskOps.createTask(taskData).then(function(){
+            mvNotifier.notify('Your new task is saved');
+            checkTasksNumber();
+        }, function(reason){
+            mvNotifier.error(reason)
+        });
     };
 
     $scope.markDone = function(task){
         task.done = true;
-        updateData($scope.randomizeMessage());
+        mvTaskOps.updateTask(task).then(function(){
+            mvNotifier.notify($scope.randomizeMessage());
+        }, function(reason){
+            mvNotifier.error(reason)
+        });
     };
 
     $scope.markUndone = function(task){
         task.done = false;
-        updateData('You still can do it!');
-
+        mvTaskOps.updateTask(task).then(function(){
+            mvNotifier.notify('You still can do it!!');
+        }, function(reason){
+            mvNotifier.error(reason)
+        });
     };
 
     $scope.deleteTask = function(index){
-        $scope.userTasks.splice(index, 1);
-        updateData('Deleted');
+        mvTaskOps.deleteTask($scope.userTasks[index]).then(function(){
+            mvNotifier.notify('Deleted');
+            $scope.userTasks.splice(index, 1);
+            checkTasksNumber()
+        }, function(reason){
+            mvNotifier.error(reason)
+        });
     };
 
     $scope.saveEditedTask = function(task){
         $scope.editing = false;
-        updateData('Your task is updated!');
-    };
-
-    function updateData(message){
-        mvAuth.updateCurrentUser({tasks: $scope.userTasks}).then(function(){
-            mvNotifier.notify(message);
-            $scope.hasTasks = ($scope.userTasks.length !== 0);
+        mvTaskOps.updateTask(task).then(function(){
+            mvNotifier.notify('Your task is updated!');
         }, function(reason){
             mvNotifier.error(reason)
         });
-    }
+    };
 });

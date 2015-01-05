@@ -22,6 +22,6 @@ angular.module('app').controller('mvLoginCtrl', function($scope, mvAuth, $http, 
     };
 
     $scope.isNavActive = function(data){
-        return $location.path() == data
+        return $location.path() == data;
     }
 });
