@@ -13,6 +13,10 @@
   padding-right: 50px;
   cursor: pointer;
 
+  @media(max-width: $mobile){
+    width: 50%;
+  }
+
   &:after {
     content: '';
     display: block;
@@ -45,7 +49,7 @@
 .task__details {
   padding: 20px;
   position: absolute;
-  width: 100%;
+  width: 90%;
   left: 100%;
   top: 0;
   border: 1px solid $color-background;
@@ -79,7 +83,7 @@
 }
 
 .task__date {
-  float: right;
+  display: block;
   color: #555;
   font-size: 14px;
   margin-top: 3px;
@@ -103,7 +107,6 @@
 }
 
 .task__mark-done {
-  margin-left: 15px;
   font-size: 14px;
   color: #555;
 }
