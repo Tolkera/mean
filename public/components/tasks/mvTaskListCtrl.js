@@ -1,7 +1,7 @@
 angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvIdentity, mvNotifier, mvTaskOps, mvTask){
     var userId = mvIdentity.currentUser._id;
 
-    $scope.userTasks = mvTask.query({userId: userId}, checkTasksNumber);
+    $scope.userTasks = mvTask.query({userId: userId});
 
     var successMessages = [
         'Good job!',
@@ -14,10 +14,6 @@ angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvId
         'Congrats!'
     ];
 
-    function checkTasksNumber(){
-        $scope.hasTasks = ($scope.userTasks.length !== 0)
-    }
-
     $scope.randomizeMessage = function(){
         return successMessages[Math.floor(Math.random()*successMessages.length)]
     };
@@ -28,7 +24,6 @@ angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvId
         $scope.newTask = '';
         mvTaskOps.createTask(taskData).then(function(){
             mvNotifier.notify('Your new task is saved');
-            checkTasksNumber();
         }, function(reason){
             mvNotifier.error(reason)
         });
@@ -56,7 +51,6 @@ angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvId
         mvTaskOps.deleteTask($scope.userTasks[index]).then(function(){
             mvNotifier.notify('Deleted');
             $scope.userTasks.splice(index, 1);
-            checkTasksNumber()
         }, function(reason){
             mvNotifier.error(reason)
         });
