@@ -6,10 +6,7 @@ var userSchema = mongoose.Schema({
     firstName: {type: String, required: '{PATH} is required'},
     hashedPwd: {type: String, required: '{PATH} is required'},
     salt: {type: String, required: '{PATH} is required'},
-    courses: [String],
-    tasks: [
-        {name: {type: String, required: '{PATH} is required'}, date: Date, done: Boolean}
-    ]
+    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }]
 });
 
 userSchema.methods = {
@@ -19,13 +16,3 @@ userSchema.methods = {
 };
 
 var User = mongoose.model('User', userSchema);
-
-exports.createDefaultUsers = function(){
-    User.find({}).exec(function(err, collection){
-        if(collection.length === 0){
-            var salt = encrypt.createSalt();
-            var hash = encrypt.hashedPwd(salt, '123');
-            User.create({username: '1', salt: salt, hashedPwd: hash});
-        }
-    })
-};

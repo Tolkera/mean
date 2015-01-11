@@ -1,4 +1,14 @@
 .icon-edit {
+  position: relative;
+  width: 16px;
+  height: 17px;
+}
+
+.edit {
+  display: none;
+}
+
+.icon-edit__icon {
   height: 11px;
   width: 4px;
   background: #fff;
@@ -7,10 +17,10 @@
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
-  position: absolute;
   display: block;
-  top: 2px;
-  left: 8px;
+  top: 4px;
+  right: 6px;
+  position: absolute;
 
   &:before {
     content: '';
@@ -35,6 +45,18 @@
     position: absolute;
     top: -5px;
     left: 0px;
+  }
+}
+
+.icon-edit--attention {
+  background: $color-attention;
+
+  &:before {
+    border-color: $color-attention transparent transparent transparent;
+  }
+
+  &:after {
+    background: $color-attention;
   }
 }
 
@@ -66,5 +88,32 @@
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
+  }
+}
+
+.icon-tick--attention {
+  background: $color-attention;
+
+  &:after {
+    background: $color-attention;
+  }
+}
+
+.icon-add__icon {
+  width: 24px;
+  height: 4px;
+  background: $color-attention;
+  position: absolute;
+  left: 4px;
+  top: 14px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 24px;
+    background: $color-attention;
+    left: 10px;
+    top: -10px;
   }
 }

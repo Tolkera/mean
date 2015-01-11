@@ -1,0 +1,32 @@
+.add-category {
+  margin-top: 20px;
+}
+
+.categories-wrap {
+  margin-top: 40px;
+}
+
+.category-item {
+  border-bottom: 1px solid $color-background;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.category-item__name {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.category-item__edit-form {
+
+}
+
+.category-item__edit-icon {
+  margin-left: 10px;
+}
+
+.category-name__edit-input {
+  font-size: 18px;
+  width: 400px;
+}

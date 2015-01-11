@@ -1,8 +1,7 @@
-angular.module('app').factory('mvTaskOps', function($http, $q, mvIdentity, mvTask){
+angular.module('app').factory('mvCategoryOps', function($http, $q, mvIdentity, mvCategory){
     return {
-
-        createTask: function(taskData){
-            var newTask = new mvTask(taskData);
+        createCategory: function(category){
+            var newTask = new mvCategory(category);
             var dfd = $q.defer();
             newTask.$save().then(function(data){
                 dfd.resolve(data);
@@ -12,28 +11,26 @@ angular.module('app').factory('mvTaskOps', function($http, $q, mvIdentity, mvTas
             return dfd.promise;
         },
 
-        deleteTask: function(taskData){
+        updateCategory: function(category){
             var dfd = $q.defer();
-            var deletedTask = new mvTask(taskData);
-            deletedTask.$delete({_id: taskData._id}).then(function(){
-                dfd.resolve();
+            var updatedTask = new mvCategory(category);
+
+            updatedTask.$update().then(function(){
+                dfd.resolve()
             }, function(response){
                 dfd.reject(response.data.reason)
             });
             return dfd.promise;
         },
 
-        updateTask: function(task){
+        deleteCategory: function(category){
             var dfd = $q.defer();
-            var clone = new mvTask();
-            angular.extend(clone, task);
-
-            clone.$update().then(function(){
-                dfd.resolve()
+            category.$delete({_id: category._id}).then(function(){
+                dfd.resolve();
             }, function(response){
                 dfd.reject(response.data.reason)
             });
             return dfd.promise;
         }
     }
-})
+});

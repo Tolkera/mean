@@ -1,17 +1,17 @@
-var Task = require('mongoose').model('Task');
+var Task = require('mongoose').model('Task'),
+    Category = require('mongoose').model('Category');
 
 exports.createTask = function(req, res, next){
     var taskData = req.body;
 
     Task.create(taskData, function(err, task){
         if (err){
-            if(err.toString().indexOf('E11000') > -1){
-                err = new Error('Duplicate user name')
-            }
             res.status(400);
             return res.send({reason: err.toString()})
         } else {
-            res.send(task);
+            Category.update({ _id: taskData.category },{ $push: { tasks: task._id} }).exec(function(error, category){
+                res.send(task);
+            });
         }
     })
 };
@@ -39,12 +39,12 @@ exports.updateTask = function(req, res, next){
 };
 
 exports.deleteTask = function(req, res, next){
-    console.log(req.query._id);
-    Task.remove({_id: req.query._id}).exec(function(err){
+    Task.remove({_id: req.query._id}).exec(function(err, collection){
         if(err) {
             req.status(400);
             return res.send({reason: err.toString()})
         } else {
+            console.log(collection);
             res.send(req.user)
         }
     });

@@ -406,6 +406,8 @@ th {
 h1, h2, h3, h4 {
   font-weight: 400;
   font-family: "Oswald", sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -465,6 +467,21 @@ img {
 
 .cf:after {
   clear: both;
+}
+
+.cancel {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+  color: #B8B8B8;
+  margin-left: 10px;
+}
+.cancel:hover {
+  color: #333;
+}
+
+.editable:hover .edit {
+  display: inline-block;
 }
 
 .app-header {
@@ -670,7 +687,7 @@ button.toast-close-button {
   }
 }
 .form-control {
-  display: block;
+  display: inline-block;
   width: 100%;
   padding: 6px 12px;
   font-size: 14px;
@@ -750,6 +767,16 @@ button.toast-close-button {
 }
 
 .icon-edit {
+  position: relative;
+  width: 16px;
+  height: 17px;
+}
+
+.edit {
+  display: none;
+}
+
+.icon-edit__icon {
   height: 11px;
   width: 4px;
   background: #fff;
@@ -758,12 +785,12 @@ button.toast-close-button {
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
-  position: absolute;
   display: block;
-  top: 2px;
-  left: 8px;
+  top: 4px;
+  right: 6px;
+  position: absolute;
 }
-.icon-edit:before {
+.icon-edit__icon:before {
   content: '';
   width: 0px;
   height: 0px;
@@ -774,7 +801,7 @@ button.toast-close-button {
   bottom: -5px;
   left: 0;
 }
-.icon-edit:after {
+.icon-edit__icon:after {
   content: '';
   height: 4px;
   width: 4px;
@@ -785,6 +812,16 @@ button.toast-close-button {
   position: absolute;
   top: -5px;
   left: 0px;
+}
+
+.icon-edit--attention {
+  background: #872D62;
+}
+.icon-edit--attention:before {
+  border-color: #872D62 transparent transparent transparent;
+}
+.icon-edit--attention:after {
+  background: #872D62;
 }
 
 .icon-tick {
@@ -814,6 +851,31 @@ button.toast-close-button {
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
+}
+
+.icon-tick--attention {
+  background: #872D62;
+}
+.icon-tick--attention:after {
+  background: #872D62;
+}
+
+.icon-add__icon {
+  width: 24px;
+  height: 4px;
+  background: #872D62;
+  position: absolute;
+  left: 4px;
+  top: 14px;
+}
+.icon-add__icon:after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 24px;
+  background: #872D62;
+  left: 10px;
+  top: -10px;
 }
 
 .container {
@@ -1158,10 +1220,6 @@ button.toast-close-button {
   padding-right: 25px;
 }
 
-.task__name:hover .task__edit-icon--name {
-  display: block;
-}
-
 .heading-primary {
   font-size: 30px;
 }
@@ -1202,6 +1260,35 @@ button.toast-close-button {
 .registration-form__cancel-link:hover {
   text-decoration: none;
   color: #555;
+}
+
+.add-category {
+  margin-top: 20px;
+}
+
+.categories-wrap {
+  margin-top: 40px;
+}
+
+.category-item {
+  border-bottom: 1px solid #B8B8B8;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.category-item__name {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.category-item__edit-icon {
+  margin-left: 10px;
+}
+
+.category-name__edit-input {
+  font-size: 18px;
+  width: 400px;
 }
 
 /*# sourceMappingURL=main.css.map */

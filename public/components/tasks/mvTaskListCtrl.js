@@ -1,7 +1,5 @@
-angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvIdentity, mvNotifier, mvTaskOps, mvTask){
+angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvIdentity, mvNotifier, mvTaskOps, mvTask, mvCategory, mvCategoryOps){
     var userId = mvIdentity.currentUser._id;
-
-    $scope.userTasks = mvTask.query({userId: userId});
 
     var successMessages = [
         'Good job!',
@@ -18,50 +16,61 @@ angular.module('app').controller('mvTaskListCtrl', function($scope, mvAuth, mvId
         return successMessages[Math.floor(Math.random()*successMessages.length)]
     };
 
-    $scope.addTask = function(){
-        var taskData = {name: $scope.newTask, date: new Date(), done: false, userId: userId};
-        $scope.userTasks.push({name: $scope.newTask, date: new Date(), done: false});
-        $scope.newTask = '';
-        mvTaskOps.createTask(taskData).then(function(){
-            mvNotifier.notify('Your new task is saved');
-        }, function(reason){
-            mvNotifier.error(reason)
-        });
+   $scope.categories = mvCategory.query();
+
+   $scope.addTask = function(category, newTask){
+       var taskData = {name: newTask, date: new Date(), done: false, userId: userId, category: category._id};
+       mvTaskOps.createTask(taskData).then(function(data){
+           category.tasks.push(data);
+           category.newTask = "";
+           mvNotifier.notify('Your new task is saved');
+       }, function(reason){
+           mvNotifier.error(reason)
+       });
     };
 
-    $scope.markDone = function(task){
-        task.done = true;
-        mvTaskOps.updateTask(task).then(function(){
-            mvNotifier.notify($scope.randomizeMessage());
-        }, function(reason){
-            mvNotifier.error(reason)
-        });
-    };
-
-    $scope.markUndone = function(task){
-        task.done = false;
-        mvTaskOps.updateTask(task).then(function(){
-            mvNotifier.notify('You still can do it!!');
-        }, function(reason){
-            mvNotifier.error(reason)
-        });
-    };
-
-    $scope.deleteTask = function(index){
-        mvTaskOps.deleteTask($scope.userTasks[index]).then(function(){
+    $scope.deleteTask = function(category, task, index){
+        mvTaskOps.deleteTask(task).then(function(){
             mvNotifier.notify('Deleted');
-            $scope.userTasks.splice(index, 1);
+            category.tasks.splice(index, 1);
         }, function(reason){
             mvNotifier.error(reason)
         });
     };
 
     $scope.saveEditedTask = function(task){
-        $scope.editing = false;
         mvTaskOps.updateTask(task).then(function(){
             mvNotifier.notify('Your task is updated!');
         }, function(reason){
             mvNotifier.error(reason)
         });
     };
+
+    $scope.addCategory = function(){
+        var categoryData = {name: $scope.newCategory, userId: userId, date: new Date()};
+        $scope.newCategory = "";
+        mvCategoryOps.createCategory(categoryData).then(function(data){
+            $scope.categories.push(data);
+            mvNotifier.notify('Your new category is saved');
+        }, function(reason){
+            mvNotifier.error(reason)
+        });
+    };
+
+    $scope.saveEditedCategory = function(category){
+        mvCategoryOps.updateCategory(category).then(function(){
+            mvNotifier.notify('Your category is updated!');
+        }, function(reason){
+            mvNotifier.error(reason)
+        });
+    };
+
+    $scope.deleteCategory = function(category, index){
+        mvCategoryOps.deleteCategory(category).then(function(){
+            $scope.categories.splice(index, 1);
+            mvNotifier.notify('Your category is deleted!');
+        }, function(reason){
+            mvNotifier.error(reason)
+        });
+    }
 });

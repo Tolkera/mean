@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     userModel = require('../models/User'),
-    courseModel = require('../models/Course'),
-    taskModel = require('../models/Task');
+    taskModel = require('../models/Task'),
+    categoryModel = require('../models/Category');
 
 module.exports = function(config){
 
@@ -11,7 +11,4 @@ module.exports = function(config){
     db.once('open', function callback () {
         console.log('database open')
     });
-
-    userModel.createDefaultUsers();
-    courseModel.createDefaultCourses();
-}
+};

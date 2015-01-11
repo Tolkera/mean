@@ -8,3 +8,23 @@
 .cf:after {
   clear: both;
 }
+
+.cancel {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+  color: $color-background;
+  margin-left: 10px;
+
+  &:hover {
+    color: #333;
+  }
+}
+
+.editable {
+  &:hover {
+    .edit {
+      display: inline-block;
+    }
+  }
+}
