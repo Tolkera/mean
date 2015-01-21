@@ -1,0 +1,110 @@
+.new-sprint-wrap {
+  margin-top: 30px;
+}
+
+.new-sprint__category {
+  background: $color-background;
+  margin-bottom: 10px;
+  width: 400px;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.new-sprint__task {
+  margin-top: 0;
+  background: #fff;
+  color: #333;
+  border-radius: 0;
+  width: 100%;
+  position: relative;
+  border: 1px solid $color-background;
+  border-top-color: transparent;
+}
+
+.new-sprint__task--selected {
+  border-color: $color-branding--light
+}
+
+.new-sprint__tasks {
+  margin-top: 0;
+}
+
+.new-sprint__category-header {
+  position: relative;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.new-sprint__icon-control {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  margin-top: -8px;
+}
+
+.new-sprint__category-name {
+  color: #fff;
+}
+
+.task-hours-wrap {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin-left: 10px;
+  width: 350px;
+}
+
+.task-hours__hours {
+  width: 200px;
+}
+
+.task-hours__form {
+  display: inline-block;
+}
+
+.task-hours__input {
+  width: 50px;
+}
+
+.new-sprint__action-btn {
+  font-size: 14px;
+}
+
+.task-hours__btn {
+  margin-left: 5px;
+}
+
+.new-sprint__btn {
+  margin-top: 30px;
+}
+
+.hours-counter {
+  float: right;
+}
+
+.hours-counter__text {
+  float: left;
+  font-size: 13px;
+  color: $color-background;
+  line-height: 1;
+  width: 70px;
+  margin-right: 5px;
+}
+
+.hours-counter__hours {
+  float: right;
+  font-family: $font-heading;
+  font-size: 40px;
+  color: $color-branding--light;
+  text-align: right;
+  margin-top: -10px;
+}
+
+.new-sprint__task-name {
+  display: block;
+}
+
+.deadline-form__input {
+  margin-left: 20px;
+  width: 100px;
+}

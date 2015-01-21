@@ -13,9 +13,8 @@ angular.module('app').factory('mvCategoryOps', function($http, $q, mvIdentity, m
 
         updateCategory: function(category){
             var dfd = $q.defer();
-            var updatedTask = new mvCategory(category);
-
-            updatedTask.$update().then(function(){
+            var updatedCategory = new mvCategory(category);
+            updatedCategory.$update({id: category._id}).then(function(){
                 dfd.resolve()
             }, function(response){
                 dfd.reject(response.data.reason)
@@ -25,7 +24,7 @@ angular.module('app').factory('mvCategoryOps', function($http, $q, mvIdentity, m
 
         deleteCategory: function(category){
             var dfd = $q.defer();
-            category.$delete({_id: category._id}).then(function(){
+            category.$delete({id: category._id}).then(function(){
                 dfd.resolve();
             }, function(response){
                 dfd.reject(response.data.reason)

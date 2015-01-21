@@ -1,7 +1,9 @@
-.icon-edit {
+.icon-control {
   position: relative;
   width: 16px;
   height: 17px;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .edit {
@@ -116,4 +118,30 @@
     left: 10px;
     top: -10px;
   }
+}
+
+.icon-pointer-down {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: solid #fff;
+  border-width: 3px 3px 0 0;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+.icon-pointer-up {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: solid #fff;
+  border-width: 3px 3px 0 0;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }

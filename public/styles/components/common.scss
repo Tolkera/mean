@@ -48,7 +48,7 @@
 }
 
 .color--branding {
-  color: $color-branding--dark
+  color: $color-branding--light
 }
 
 .color--background {
@@ -66,4 +66,8 @@
     margin: 25px 0;
     font-size: 16px;
   }
+}
+
+.standard-margin {
+  margin-top: 20px;
 }

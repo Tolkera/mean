@@ -10,7 +10,7 @@ exports.createCategory = function(req, res, next){
             res.status(400);
             return res.send({reason: err.toString()})
         } else {
-            User.update({ _id: categoryData.userId },{ $push: { categories: category._id} }).exec(function(error, user){
+            User.update({ _id: req.user._id},{ $push: { categories: category._id} }).exec(function(error, user){
                  res.send(category);
             })
         }
@@ -18,23 +18,21 @@ exports.createCategory = function(req, res, next){
 };
 
 exports.getCategories = function(req, res, next){
-        var categories = req.user.categories;
-            User.findOne({_id: req.user._id}).exec(function(err, user){
-
-                if(err){
-                    return res.send({reason: err.toString()})
-                } else {
-                     Category.find({_id : {$in: user.categories}}).populate('tasks').exec(function(err, categories){
-                         res.send(categories);
-                     })
-                }
-        });
+    User.findOne({_id: req.user._id}).exec(function(err, user){
+        if(err){
+            return res.send({reason: err.toString()})
+        } else {
+             Category.find({_id : {$in: user.categories}}).populate('tasks').exec(function(err, categories){
+                 res.send(categories);
+             })
+        }
+    });
 };
 
 exports.updateCategory = function(req, res, next){
     var categoryUpdates = req.body;
 
-    Category.update({_id: categoryUpdates._id}, {$set: { name: categoryUpdates.name}}).exec(function(err, category){
+    Category.update({_id: req.params.id}, {$set: { name: categoryUpdates.name}}).exec(function(err, category){
             if(err) {
                 req.status(400);
                 return res.send({reason: err.toString()})
@@ -46,7 +44,7 @@ exports.updateCategory = function(req, res, next){
 
 
 exports.deleteCategory = function(req, res, next){
-    var categoryId = req.query._id;
+    var categoryId = req.params.id;
     Category.remove({_id: categoryId}).exec(function(err){
         if(err) {
             req.status(400);

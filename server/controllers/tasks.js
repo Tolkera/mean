@@ -26,7 +26,7 @@ exports.getTasks = function(req, res, next){
 exports.updateTask = function(req, res, next){
     var taskUpdates = req.body;
 
-    Task.update({_id: taskUpdates._id}, {$set: {
+    Task.update({_id: req.params.id}, {$set: {
         done: req.body.done,
         name: req.body.name
     }}).exec(function(err, collection){
@@ -39,7 +39,7 @@ exports.updateTask = function(req, res, next){
 };
 
 exports.deleteTask = function(req, res, next){
-    Task.remove({_id: req.query._id}).exec(function(err, collection){
+    Task.remove({_id: req.params.id}).exec(function(err, collection){
         if(err) {
             req.status(400);
             return res.send({reason: err.toString()})

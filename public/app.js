@@ -17,7 +17,7 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             templateUrl: '/components/main/main',
         })
         .when('/about',{
-            templateUrl: '/components/main/about',
+            templateUrl: '/components/main/about'
         })
         .when('/register',{
             templateUrl: '/components/account/register',
@@ -28,20 +28,20 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             controller: 'mvProfileCtrl',
             resolve: routeRoleChecker.user
         })
-        .when('/courses',{
-            templateUrl: '/components/courses/course-list',
-            controller: 'mvCourseListCtrl',
-            resolve: routeRoleChecker.user
-        })
-        .when('/courses/:id',{
-            templateUrl: '/components/courses/course-details',
-            controller: 'mvCourseDetailsCtrl',
-            resolve: routeRoleChecker.user
-        })
 
         .when('/tasks',{
             templateUrl: '/components/tasks/task-list',
             controller: 'mvTaskListCtrl',
+            resolve: routeRoleChecker.user
+        })
+        .when('/current-sprint',{
+            templateUrl: '/components/sprints/current-sprint',
+            controller: 'mvCurrentSprintCtrl',
+            resolve: routeRoleChecker.user
+        })
+        .when('/add-sprint',{
+            templateUrl: '/components/sprints/add-sprint',
+            controller: 'mvNewSprintCtrl',
             resolve: routeRoleChecker.user
         })
 

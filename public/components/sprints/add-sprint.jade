@@ -1,0 +1,27 @@
+div.container
+    div.new-sprint-wrap.cf
+        div.hours-counter
+            span.hours-counter__text hours planned for this sprint
+            span.hours-counter__hours {{hours}}
+        ul.new-sprint-categories
+            li.category-item.new-sprint__category(ng-repeat="category in categories track by $index")
+                header.new-sprint__category-header(ng-click="category.close = !category.close")
+                    h2.new-sprint__category-name.heading-secondary {{category.name}}
+                    span.new-sprint__icon-control.icon-pointer-down(ng-class="{'icon-pointer-up': category.close}")
+                ul.tasks.new-sprint__tasks(ng-hide="category.close")
+                    li.task-item.new-sprint__task(ng-repeat="task in category.tasks track by $index", ng-class="{'new-sprint__task--selected': task.added}")
+                        h3.task__name.new-sprint__task-name(ng-click="selectTask(task)") {{task.name}}
+                        div.task-hours-wrap
+                            button.btn.btn-secondary.new-sprint__action-btn.btn--attention(ng-click="selectTask(task)", ng-hide="task.selectingTask || task.added") Add to sprint
+                            span.task-hours__hours(ng-hide="task.selectingTask") {{task.taskHours}}
+                            form.task-hours__form(name="selectTaskForm", ng-show="task.selectingTask")
+                                input.form-control.task-hours__input(ng-model="task.taskHours")
+                                button.btn.btn-tertiary.btn--attention.task-hours__btn(ng-click="addHours(task, category)") Add hours
+                            span.cancel(ng-click="deleteTask(task)", ng-show="task.added") Remove from sprint
+            form.deadline-form(name="deadlineForm")
+                label(for="deadline") Deadline
+                input.form-control.deadline-form__input( datepicker, ng-model="date", name="deadline", id=deadline, required)
+            button.btn.btn-primary.btn--branding.new-sprint__btn(ng-click="calculate()", ng-disabled="submitDisabled() || deadlineForm.$invalid") Create a new sprint!
+
+
+

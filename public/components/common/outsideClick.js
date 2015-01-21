@@ -15,3 +15,18 @@ angular.module('app').directive('outsideClick', function($document){
         }
     }
 });
+
+angular.module('app').directive('hours', function($document){
+    return {
+        restrict: 'A',
+        scope: {
+            hoursPlanned: '=',
+            hoursSpent: '='
+        },
+        link: function(scope, elem) {
+            for (var i = 0; i < scope.hoursPlanned.length; i++){
+
+            }
+        }
+    }
+});

@@ -12,10 +12,10 @@ angular.module('app').factory('mvTaskOps', function($http, $q, mvIdentity, mvTas
             return dfd.promise;
         },
 
-        deleteTask: function(taskData){
+        deleteTask: function(task){
             var dfd = $q.defer();
-            var deletedTask = new mvTask(taskData);
-            deletedTask.$delete({_id: taskData._id}).then(function(){
+            var deletedTask = new mvTask(task);
+            deletedTask.$delete({id: task._id}).then(function(){
                 dfd.resolve();
             }, function(response){
                 dfd.reject(response.data.reason)
@@ -25,10 +25,8 @@ angular.module('app').factory('mvTaskOps', function($http, $q, mvIdentity, mvTas
 
         updateTask: function(task){
             var dfd = $q.defer();
-            var clone = new mvTask();
-            angular.extend(clone, task);
-
-            clone.$update().then(function(){
+            var updatedTask = new mvTask(task);
+            updatedTask.$update({id: task._id}).then(function(){
                 dfd.resolve()
             }, function(response){
                 dfd.reject(response.data.reason)

@@ -1,7 +1,8 @@
 var auth = require('./auth'),
     users = require('../controllers/users'),
     tasks = require('../controllers/tasks'),
-    categories = require('../controllers/categories');
+    categories = require('../controllers/categories'),
+    sprints = require('../controllers/sprints');
 
 
 module.exports = function(app){
@@ -13,13 +14,18 @@ module.exports = function(app){
     app.put('/api/users', users.updateUser);
     app.post('/api/tasks', tasks.createTask);
     app.get('/api/tasks', tasks.getTasks);
-    app.put('/api/tasks', tasks.updateTask);
-    app.delete('/api/tasks', tasks.deleteTask);
+    app.put('/api/tasks/:id', tasks.updateTask);
+    app.delete('/api/tasks/:id', tasks.deleteTask);
 
     app.post('/api/categories', categories.createCategory);
     app.get('/api/categories', categories.getCategories);
-    app.put('/api/categories', categories.updateCategory);
-    app.delete('/api/categories', categories.deleteCategory);
+    app.put('/api/categories/:id', categories.updateCategory);
+    app.delete('/api/categories/:id', categories.deleteCategory);
+
+    app.post('/api/sprints', sprints.addSprint);
+    app.get('/api/sprints/:id', sprints.getCurrentSprint);
+    app.delete('/api/sprints/:id', sprints.finishSprint);
+    app.put('/api/sprints/:id', sprints.updateSprint)
 
     app.post('/login', auth.authenticate);
     app.post('/logout', function(req, res){
@@ -37,7 +43,8 @@ module.exports = function(app){
                 bootstrappedUser: {
                     _id: req.user._id,
                     username: req.user.username,
-                    firstName: req.user.firstName
+                    firstName: req.user.firstName,
+                    currentSprint: req.user.currentSprint
                 }
             })
         } else {

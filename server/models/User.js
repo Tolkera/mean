@@ -6,7 +6,9 @@ var userSchema = mongoose.Schema({
     firstName: {type: String, required: '{PATH} is required'},
     hashedPwd: {type: String, required: '{PATH} is required'},
     salt: {type: String, required: '{PATH} is required'},
-    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }]
+    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
+    currentSprint: {type: mongoose.Schema.Types.ObjectId, ref: 'Sprint'},
+    sprints:[{type: mongoose.Schema.Types.ObjectId, ref: 'Sprint'}]
 });
 
 userSchema.methods = {
@@ -14,5 +16,6 @@ userSchema.methods = {
         return encrypt.hashedPwd(this.salt, pwdEntered) === this.hashedPwd;
     }
 };
+
 
 var User = mongoose.model('User', userSchema);

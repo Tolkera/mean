@@ -9,13 +9,13 @@ div.container
             li.category-item(ng-repeat="category in categories track by $index")
                 header.category-item__header.editable
                     h2.category-item__name.heading-secondary(ng-hide="category.editingCategory", ng-click="category.editingCategory = !category.editingCategory") {{category.name}}
-                        button.edit.icon-edit.category-item__edit-icon
+                        button.edit.icon-control.category-item__edit-icon
                             span.icon-edit__icon.icon-edit--attention
                 div.category-item__edit-form(ng-show="category.editingCategory")
                     span.cancel(ng-click="deleteCategory(category, $index)") Delete
                     form.category-item__edit-form(name="categoryEditForm", ng-submit="category.editingCategory = false")
                         input.form-control.category-name__edit-input(ng-model="category.name", name="categoryName", required)
-                        button.icon-edit.category-item__edit-icon(ng-click = "saveEditedCategory(category)", type="submit", ng-disabled="categoryEditForm.$invalid" )
+                        button.icon-control.category-item__edit-icon(ng-click = "saveEditedCategory(category)", type="submit", ng-disabled="categoryEditForm.$invalid" )
                             span.icon-tick.icon-tick--attention
                         div.form-error(ng-messages="categoryEditForm.categoryName.$error")
                             span(ng-message="required") This shouldn't be empty!
@@ -23,7 +23,7 @@ div.container
                 ul.tasks
                     li.task-item(ng-repeat="task in category.tasks track by $index" , ng-class="{'task--done' : task.done, 'task__name--open' : elemShown}", ng-click="switchScope()", outside-click)
                         span.task__name.editable(ng-hide="editing", ng-click="editing = !editing") {{task.name}}
-                            button.icon-edit.task__edit-icon.task__edit-icon--name( ng-hide="editing")
+                            button.icon-control.task__edit-icon.task__edit-icon--name( ng-hide="editing")
                                 span.icon-edit__icon
                         form.task__edit-form(name="taskEditForm" , ng-show="editing", ng-submit="editing = false")
                             input.form-control(ng-model="task.name", name="taskName", required)
@@ -35,7 +35,7 @@ div.container
                             button.task__delete(ng-click="deleteTask(category, task, $index)") Delete
                             span.task__date Created on {{task.date |date }}
                     div.add-task-wrap
-                         button.icon-add.icon-edit(ng-hide="category.addingTask", ng-click="category.addingTask = !category.addingTask")
+                         a.icon-add.icon-control(ng-hide="category.addingTask", ng-click="category.addingTask = !category.addingTask", title="Add a new task!")
                             span.icon-add__icon
                          form.add-task-form(name="addTaskForm", ng-show="category.addingTask", ng-submit="category.addingTask = false")
                             input.form-control.add-task-form__input(ng-model="category.newTask", required)

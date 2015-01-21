@@ -1,0 +1,18 @@
+div.container.content
+    a(ng-show="!currentSprint", href="/add-sprint") Add a sprint!
+    div.current-spring-wrap(ng-show="currentSprint")
+        header.current-sprint__header.cf
+            h1.heading-primary.current-sprint__heading Current Sprint
+            span.current-sprint__deadline {{deadlineMessage}}
+        ul
+            li.current-sprint__category(ng-repeat="category in sprint.contents")
+                h2.heading-secondary.category-name {{category.categoryInfo.name}}
+                ul
+                    li.current-sprint__task(ng-repeat="task in category.tasks")
+                        span.current-sprint__task-name {{task.taskInfo.name}}
+                        ul.hours-spent()
+                            li.hours-spent__item(ng-repeat="hour in task.plan track by $index", ng-class="{'hours-spent__item--done' : hour.added}", ng-click="addHour(hour, task)")
+
+        div.standard-margin
+            button.btn.btn-primary.btn--attention(ng-click="finishSprint()") Finish this sprint
+            button.cancel(ng-click="deleteSprint()") Delete this sprint

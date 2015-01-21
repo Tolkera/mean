@@ -1,0 +1,47 @@
+.current-sprint__category {
+}
+
+.category-name {
+  padding: 10px 0;
+}
+
+.current-sprint__task-name {
+  display: inline-block;
+  vertical-align: middle;
+  width: 200px;
+}
+
+.hours-spent {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.hours-spent__item {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 1px solid $color-attention;
+  border-right: 0;
+
+  &:last-child {
+    border-right: 1px solid $color-attention;
+  }
+}
+
+.hours-spent__item--done {
+  background: $color-branding--light;
+}
+
+.current-sprint__deadline {
+  float: right;
+  width: 270px;
+  text-align: right;
+}
+
+.current-sprint__heading {
+  float: left;
+}
+
+.current-sprint__header {
+  margin-bottom: 30px;
+}

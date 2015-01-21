@@ -1,7 +1,9 @@
 var mongoose = require('mongoose'),
     userModel = require('../models/User'),
     taskModel = require('../models/Task'),
-    categoryModel = require('../models/Category');
+    categoryModel = require('../models/Category'),
+    sprintModel = require('../models/Sprint');
+
 
 module.exports = function(config){
 
