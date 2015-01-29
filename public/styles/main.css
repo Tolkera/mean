@@ -8716,6 +8716,10 @@ button.toast-close-button {
   }
 }
 
+.gm-add-task {
+  margin-bottom: 10px;
+}
+
 .gm-category-item {
   border-bottom: 1px solid #303030;
   margin-bottom: 50px;
@@ -8797,7 +8801,7 @@ button.toast-close-button {
 }
 
 .gm-sprint__deadline {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 @media (max-width: 768px) {
   .gm-sprint__deadline {
