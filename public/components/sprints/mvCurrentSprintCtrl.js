@@ -8,7 +8,7 @@ angular.module('app').controller('mvCurrentSprintCtrl', function($scope, mvNotif
                     task.plan = [];
                     for (var i = 0; i<task.planned; i++){
                         var hour = {};
-                        if(i<task.spent){ 
+                        if(i<task.spent){
                             hour.added = true;
                         }
                         task.plan.push(hour)
@@ -26,20 +26,20 @@ angular.module('app').controller('mvCurrentSprintCtrl', function($scope, mvNotif
             } else if ($scope.currentDate > $scope.finish) {
                 $scope.deadlineMessage = 'Today is your deadline!'
             }
-
-            console.log($scope.deadlineMessage);
-
         });
     }
 
 
     $scope.finishSprint = function(){
-        mvSprintOps.finishSprint().then(function(){
-            mvNotifier.notify('Your sprint is finished! Congrats!');
-            $scope.currentSprint = false;
-        }, function(){
-            mvNotifier.notify('Sorry, there is some error');
-        })
+        var deleteConfirmed = confirm('Sure?');
+        if(deleteConfirmed) {
+            mvSprintOps.finishSprint().then(function(){
+                mvNotifier.notify('Your sprint is finished! Congrats!');
+                $scope.currentSprint = false;
+            }, function(){
+                mvNotifier.notify('Sorry, there is some error');
+            })
+        }
     };
 
     $scope.addHour = function(hour, task){

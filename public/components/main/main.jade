@@ -1,13 +1,15 @@
 div.container(ng-controller="mvLoginCtrl")
-    form.login-form.form(ng-hide="identity.isAuthenticated()")
-        div.form-group.cf
-            label.form-group__label(for="username") User name
-            input.form-group__control.form-control(type="text", name="username", id="username", ng-model="username")
-        div.form-group.cf
-            label.form-group__label(for="password") Password
-            input.form-group__control.form-control(type="password", name="password", id="password", ng-model="password")
+    form.form-horizontal.gm-user-form(ng-hide="identity.isAuthenticated()")
         div.form-group
-            button.btn.btn-primary.btn--attention(ng-click="login(username, password)") Log in
+            label.col-lg-4.control-label(for="username") Username
+            div.col-lg-8
+                input.form-control(type="text", name="username", id="username", ng-model="username")
+        div.form-group
+            label.col-lg-4.control-label(for="username") Password
+            div.col-lg-8
+                input.form-control(type="password", name="password", id="password", ng-model="password")
+        div.form-group
+            button.btn.btn-block.gm-attention(type="submit", ng-click="login(username, password)") Log in
 
     div(ng-show="identity.isAuthenticated()")
         h1.message Welcome {{identity.currentUser.firstName}}!

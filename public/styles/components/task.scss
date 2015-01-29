@@ -1,161 +1,77 @@
-.tasks {
+.gm-add-category-form {
   margin-top: 20px;
 }
 
-.task-item {
-  padding: 5px 10px;
-  border-radius: 3px;
-  width: 40%;
-  position: relative;
-  background: $color-background;
-  margin-top: 1px;
-  color: #fff;
-  padding-right: 50px;
-  cursor: pointer;
+.gm-tasks.list-group {
+  margin-bottom: 10px;
+}
 
-  @media(max-width: $mobile){
-    width: 50%;
+.gm-task {
+  padding: 20px 0;
+
+  &.list-group-item {
+    padding-right: 0;
+    padding-left: 0;
   }
-
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 50%;
-    margin-top: -2px;
-    right: 5px;
-    width: 5px;
-    height: 5px;
-    border: solid #fff;
-    border-width: 3px 3px 0 0;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
-}
-
-.task__name--open {
-  &:after {
-    -webkit-transform: rotate(-135deg);
-    -moz-transform: rotate(-135deg);
-    -ms-transform: rotate(-135deg);
-    -o-transform: rotate(-135deg);
-    transform: rotate(-135deg);
-  }
-}
-
-.task__details {
-  padding: 20px;
-  position: absolute;
-  width: 90%;
-  left: 100%;
-  top: 0;
-  border: 1px solid $color-background;
-  border-radius: 3px;
-  margin-left: 8px;
-  background: #fff;
-
-  &:before,
-  &:after {
-    right: 100%;
-    top: 20px;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-  }
-
-  &:before {
-    border-right-color: $color-background;
-    border-width: 8px;
-    margin-top: -8px;
-  }
-
-  &:after {
-    border-right-color: #fff;
-    border-width: 7px;
-    margin-top: -7px;
-  }
-}
-
-.task__date {
-  display: block;
-  color: #555;
-  font-size: 14px;
-  margin-top: 3px;
-}
-
-.add-task-wrap {
-  margin-top: 20px;
-}
-
-.add-task-form__btn {
-  display: inline-block;
-  margin-left: 10px;
-  width: auto;
-  padding-right: 20px;
-  padding-left: 20px;
-}
-
-.add-task-form__input {
-  width: 50%;
-  display: inline-block;
-}
-
-.task__mark-done {
-  font-size: 14px;
-  color: #555;
-}
-
-.task--done {
-  background: $color-branding--light;
 
   &:hover {
-    background: $color-branding--light;
+    .gm-task__details {
+      display: inline-block;
+    }
   }
 }
 
-.task__delete {
-  margin-left: 15px;
-  font-size: 14px;
-  color: $color-background;
-}
+.gm-task__name {
+  cursor: pointer;
+  .edit {
+    margin-left: 5px;
 
-.task__edit-form {
-  color: #555;
-  width: 80%;
-
-  input {
-    padding: 3px;
-    width: 200px;
-    display: inline-block;
   }
 }
 
-.task__edit-icon {
-  display: inline-block;
-  height: 20px;
-  width: 20px;
-  position: relative;
-  vertical-align: middle;
-  margin-left: 5px;
+.gm-task__details-delete {
+  margin-left: 10px;
+
+  @media(max-width: $mobile) {
+    display: block;
+    margin-left: 0;
+  }
 }
 
-.task__edit-icon--name {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  margin-top: -8px;
+.gm-task__details {
   display: none;
+
+  @media(max-width: $tablet) {
+    display: block;
+    text-align: left;
+  }
+
+  @media(max-width: $mobile){
+    margin-top: 10px;
+  }
 }
 
-.task__name {
-  position: relative;
-  display: inline-block;
-  padding-right: 25px;
-  font-family: $font-ordinary;
+.gm-add-task__sign {
+  font-size: 30px;
+  cursor: pointer;
+  padding-left: 0;
+}
+
+.gm-add-task-form {
+
+  .form-group {
+    margin-right: 10px;
+
+    @media(max-width: $mobile){
+      margin-right: 0;
+    }
+  }
+
+  .form-control {
+    width: 300px;
+
+    @media(max-width: $tablet){
+      width: 100%;
+    }
+  }
 }

@@ -1,14 +1,20 @@
 div.container(ng-controller="mvRegisterCtrl")
-    form.registration-form.form(ng-hide="identity.isAuthenticated()", novalidate, name="registrationForm")
-        div.form-group.cf
-            label.form-group__label.required-sign(for="username") User name
-            input.form-group__control.form-control(type="text", name="username", id="username", ng-model="username", required)
-        div.form-group.cf
-            label.form-group__label.required-sign(for="username") First name
-            input.form-group__control.form-control(type="text", name="firstName", id="firstName", ng-model="firstName", required)
-        div.form-group.cf
-            label.form-group__label.required-sign(for="password") Password
-            input.form-group__control.form-control(type="password", name="password", id="password", ng-model="password", required)
-        div.form-group.cf
-            button.btn.btn-primary.btn--attention.registration-form__btn(ng-click="register()", ng-disabled="registrationForm.$invalid") Sign up
-            a.registration-form__cancel-link.color--background(href="/") Cancel
+    form.gm-user-form.form-horizontal(ng-hide="identity.isAuthenticated()", novalidate, name="registrationForm")
+        fieldset
+        legend.text-center Register
+        div.form-group
+            label.col-lg-4.control-label.required-sign(for="username") User name
+            div.col-lg-8
+                input.form-control(type="text", name="username", id="username", ng-model="username", required)
+        div.form-group
+            label.col-lg-4.control-label.required-sign(for="username") First name
+            div.col-lg-8
+                input.form-control(type="text", name="firstName", id="firstName", ng-model="firstName", required)
+        div.form-group
+            label.col-lg-4.control-label.required-sign(for="password") Password
+            div.col-lg-8
+                input.form-control(type="password", name="password", id="password", ng-model="password", required)
+        div.form-group
+            div.col-lg-6.col-lg-offset-2.text-right
+                button.btn.gm-attention.btn-block(ng-click="register()", ng-disabled="registrationForm.$invalid") Sign up
+            a.btn.btn-link.btn-block(href="/") Cancel

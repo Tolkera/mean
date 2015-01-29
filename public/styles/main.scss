@@ -5,29 +5,21 @@ $tablet: 1200px;
 $color-attention: #872D62;
 $color-background: #B8B8B8;
 $color-branding--dark: #0A4700;
-$color-branding--light: #138F00;
+$color-branding--light: #258cd1;
+$color-error: #e74c3c;
 $font-ordinary: 'Roboto', sans-serif;
 $font-heading: 'Oswald', sans-serif;
 
 //3C8D2F
-
-@import "components/normalize";
+@import "components/bootstrap";
 @import "components/base";
 @import "components/utils";
-@import 'components/header';
 @import "components/toastr";
 @import 'components/form';
-@import "components/icon";
 @import "components/common";
-@import "components/button";
 @import "components/nav";
 @import "components/task-filter-controls";
 @import "components/task";
-@import "components/heading";
-@import "components/about";
-@import "components/login-form";
-@import "components/registration-form";
 @import "components/category";
 @import "components/sprint";
 @import "components/jquery-ui";
-@import "components/current-sprint";

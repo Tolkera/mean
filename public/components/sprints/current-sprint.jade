@@ -1,18 +1,18 @@
 div.container.content
     a(ng-show="!currentSprint", href="/add-sprint") Add a sprint!
-    div.current-spring-wrap(ng-show="currentSprint")
-        header.current-sprint__header.cf
-            h1.heading-primary.current-sprint__heading Current Sprint
-            span.current-sprint__deadline {{deadlineMessage}}
-        ul
-            li.current-sprint__category(ng-repeat="category in sprint.contents")
-                h2.heading-secondary.category-name {{category.categoryInfo.name}}
-                ul
-                    li.current-sprint__task(ng-repeat="task in category.tasks")
-                        span.current-sprint__task-name {{task.taskInfo.name}}
-                        ul.hours-spent()
-                            li.hours-spent__item(ng-repeat="hour in task.plan track by $index", ng-class="{'hours-spent__item--done' : hour.added}", ng-click="addHour(hour, task)")
 
+    div(ng-show="currentSprint")
+        header.gm-sptint__header.row
+            h1.col-md-9 Current Sprint
+            p.col-md-3.gm-sprint__deadline {{deadlineMessage}}
+        ul.list-unstyled
+            li.gm-sprint__category.gm-category-item(ng-repeat="category in sprint.contents")
+                h3 {{category.categoryInfo.name}}
+                ul.list-unstyled.list-group
+                    li.list-group-item.row(ng-repeat="task in category.tasks")
+                        span.col-md-3.gm-sprint__task-name {{task.taskInfo.name}}
+                        ul.col-md-9.hours
+                            li.gm-hours__item(ng-repeat="hour in task.plan track by $index", ng-class="{'gm-hours__item--done' : hour.added}", ng-click="addHour(hour, task)")
         div.standard-margin
-            button.btn.btn-primary.btn--attention(ng-click="finishSprint()") Finish this sprint
-            button.cancel(ng-click="deleteSprint()") Delete this sprint
+            button.btn.gm-attention(ng-click="finishSprint()") Finish this sprint
+            button.btn.btn-link(ng-click="deleteSprint()") Delete this sprint

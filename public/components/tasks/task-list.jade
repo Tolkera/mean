@@ -1,47 +1,51 @@
 div.container
-
-    form.add-category(name="addCategoryForm")
-        input.form-control.add-task-form__input(ng-model="newCategory", required)
-        button.btn.btn-secondary.btn--attention.add-task-form__btn(ng-click="addCategory()", ng-disabled="addCategoryForm.$invalid") Create category
-
-    div.categories-wrap
-        ul.category
-            li.category-item(ng-repeat="category in categories track by $index")
-                header.category-item__header.editable
-                    h2.category-item__name.heading-secondary(ng-hide="category.editingCategory", ng-click="category.editingCategory = !category.editingCategory") {{category.name}}
-                        button.edit.icon-control.category-item__edit-icon
-                            span.icon-edit__icon.icon-edit--attention
-                div.category-item__edit-form(ng-show="category.editingCategory")
-                    span.cancel(ng-click="deleteCategory(category, $index)") Delete
-                    form.category-item__edit-form(name="categoryEditForm", ng-submit="category.editingCategory = false")
-                        input.form-control.category-name__edit-input(ng-model="category.name", name="categoryName", required)
-                        button.icon-control.category-item__edit-icon(ng-click = "saveEditedCategory(category)", type="submit", ng-disabled="categoryEditForm.$invalid" )
-                            span.icon-tick.icon-tick--attention
-                        div.form-error(ng-messages="categoryEditForm.categoryName.$error")
-                            span(ng-message="required") This shouldn't be empty!
-
-                ul.tasks
-                    li.task-item(ng-repeat="task in category.tasks track by $index" , ng-class="{'task--done' : task.done, 'task__name--open' : elemShown}", ng-click="switchScope()", outside-click)
-                        span.task__name.editable(ng-hide="editing", ng-click="editing = !editing") {{task.name}}
-                            button.icon-control.task__edit-icon.task__edit-icon--name( ng-hide="editing")
-                                span.icon-edit__icon
-                        form.task__edit-form(name="taskEditForm" , ng-show="editing", ng-submit="editing = false")
-                            input.form-control(ng-model="task.name", name="taskName", required)
-                            button.task__edit-icon(ng-click = "saveEditedTask(task)", type="submit", ng-disabled="taskEditForm.$invalid" )
-                                span.icon-tick
-                            div.form-error(ng-messages="taskEditForm.taskName.$error")
+    div.row
+        div.col-sm-8
+            ul.list-unstyled
+                li.gm-category-item(ng-repeat="category in categories track by $index")
+                    header.category-item__header.editable
+                        h3.gm-category__name(ng-hide="category.editingCategory", ng-click="category.editingCategory = !category.editingCategory") {{category.name}}
+                            button.edit.gm-category__name-edit
+                                span.glyphicon.glyphicon-pencil
+                    div(ng-show="category.editingCategory")
+                        form.form-inline(name="categoryEditForm", ng-submit="category.editingCategory = false")
+                            input.form-control(ng-model="category.name", name="categoryName", required)
+                            button.btn(ng-click = "saveEditedCategory(category)", type="submit", ng-disabled="categoryEditForm.$invalid" )
+                                span.glyphicon.glyphicon-ok
+                            button.btn.text-muted(ng-click="deleteCategory(category, $index)") Delete
+                            div.form-error(ng-messages="categoryEditForm.categoryName.$error")
                                 span(ng-message="required") This shouldn't be empty!
-                        div.task__details.arrow_box(ng-show="elemShown")
-                            button.task__delete(ng-click="deleteTask(category, task, $index)") Delete
-                            span.task__date Created on {{task.date |date }}
-                    div.add-task-wrap
-                         a.icon-add.icon-control(ng-hide="category.addingTask", ng-click="category.addingTask = !category.addingTask", title="Add a new task!")
-                            span.icon-add__icon
-                         form.add-task-form(name="addTaskForm", ng-show="category.addingTask", ng-submit="category.addingTask = false")
-                            input.form-control.add-task-form__input(ng-model="category.newTask", required)
-                            button.btn.btn-secondary.btn--attention.add-task-form__btn(ng-click="addTask(category, category.newTask)", ng-disabled="addTaskForm.$invalid") Add task
-                            span.cancel(ng-click="category.addingTask = false") Cancel
+                    ul.gm-tasks.list-unstyled.list-group
+                        li.list-group-item.gm-task.row(ng-repeat="task in category.tasks track by $index")
+                            div.col-md-6
+                                span.gm-task__name.editable(ng-hide="editing", ng-click="editing = !editing")
+                                    span {{task.name}}
+                                    button.edit
+                                        span.glyphicon.glyphicon-pencil
+                                form.form-inline(name="taskEditForm" , ng-show="editing", ng-submit="editing = false")
+                                    input.form-control(ng-model="task.name", name="taskName", required)
+                                    button.btn(ng-click = "saveEditedTask(task)", type="submit", ng-disabled="taskEditForm.$invalid" )
+                                        span.glyphicon.glyphicon-ok
+                                    div.form-error(ng-messages="taskEditForm.taskName.$error")
+                                        span(ng-message="required") This shouldn't be empty!
+                            div.gm-task__details.col-md-6.text-right
+                                span.text-muted Created on {{task.date |date }}
+                                button.gm-task__details-delete(ng-click="deleteTask(category, task, $index)") Delete
+                    div.gm-add-task
+                        button.btn.gm-add-task__sign
+                            span.glyphicon.glyphicon-plus.color--attention(ng-hide="category.addingTask", ng-click="category.addingTask = !category.addingTask", title="Add a new task!")
+                        form.gm-add-task-form.form-inline(name="addTaskForm", ng-show="category.addingTask", ng-submit="category.addingTask = false")
+                            div.form-group
+                                input.form-control(ng-model="category.newTask", required)
+                            div.form-group
+                                button.btn.gm-attention(ng-click="addTask(category, category.newTask)", ng-disabled="addTaskForm.$invalid") Add task
+                                span.btn.btn-link(ng-click="category.addingTask = false") Cancel
 
+        div.col-sm-4.gm-add-category-form
+            h4 Create a category
+            form(name="addCategoryForm")
+                input.form-control.form-group(ng-model="newCategory", required)
+                button.btn.btn.btn-block.gm-attention.form-group(ng-click="addCategory()", ng-disabled="addCategoryForm.$invalid") Add
 
 
 

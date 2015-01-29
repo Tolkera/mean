@@ -18,6 +18,7 @@ exports.createCategory = function(req, res, next){
 };
 
 exports.getCategories = function(req, res, next){
+
     User.findOne({_id: req.user._id}).exec(function(err, user){
         if(err){
             return res.send({reason: err.toString()})

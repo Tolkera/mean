@@ -1,17 +1,22 @@
-form.registration-form.form(novalidate, name="profileForm")
-        div.form-group.cf
-            label.form-group__label(for="username") User name
-            input.form-group__control.form-control(type="text", name="username", id="username", ng-model="username", required)
-        div.form-error.form__error(ng-messages="profileForm.username.$error")
-            span(ng-message="required") This shouldn't be empty!
-        div.form-group.cf
-            label.form-group__label(for="username") First name
-            input.form-group__control.form-control(type="text", name="firstName", id="firstName", ng-model="firstName", required)
-        div.form-error(ng-messages="profileForm.firstName.$error")
-            span(ng-message="required") This shouldn't be empty!
-        div.form-group.cf
-            label.form-group__label(for="password") Password
-            input.form-group__control.form-control(type="password", name="password", id="password", ng-model="password")
-        .form-group.cf
-            button.btn.btn-primary.btn--attention.registration-form__btn(ng-click="update()", ng-disabled="profileForm.$invalid") Save
-            a.registration-form__cancel-link.color--background(href="/") Cancel
+div.container
+    form.gm-user-form.form-horizontal(novalidate, name="profileForm")
+            div.form-group(ng-class="{'has-error': profileForm.username.$invalid}")
+                label.col-lg-4.control-label.gm-required-sign(for="username") User name
+                div.col-lg-8
+                    input.form-control(type="text", name="username", id="username", ng-model="username", required)
+                    div.help-block(ng-messages="profileForm.username.$error")
+                        span(ng-message="required") This shouldn't be empty!
+            div.form-group(ng-class="{'has-error': profileForm.firstName.$invalid}")
+                label.col-lg-4.control-label.gm-required-sign(for="firstName") First name
+                div.col-lg-8
+                    input.form-control(type="text", name="firstName", id="firstName", ng-model="firstName", required)
+                    div.help-block(ng-messages="profileForm.firstName.$error")
+                        span(ng-message="required") This shouldn't be empty!
+            div.form-group
+                label.col-lg-4.control-label(for="password") Password
+                div.col-lg-8
+                    input.form-control(type="password", name="password", id="password", ng-model="password")
+            div.form-group
+                div.col-lg-6.col-lg-offset-2.text-right
+                    button.btn.gm-attention.btn-block(ng-click="update()", ng-disabled="profileForm.$invalid") Save
+                a.btn.btn-link.btn-block(href="/") Cancel

@@ -27,6 +27,7 @@ angular.module('app').controller('mvNewSprintCtrl', function($scope, mvNotifier,
         task.taskHours = "";
         $scope.addHours(task);
         $scope.submitDisabled();
+        task.added = false;
     };
 
     $scope.calculate = function(){

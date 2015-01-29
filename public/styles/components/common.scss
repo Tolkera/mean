@@ -1,9 +1,3 @@
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 10px;
-}
-
 .meta-dropdown {
   position: relative;
 }
@@ -70,4 +64,41 @@
 
 .standard-margin {
   margin-top: 20px;
+}
+
+.gm-container {
+  max-width: 900px;
+}
+
+.gm-link-item {
+  font-family: $font-heading;
+  font-size: 16px;
+
+  &:active,
+  &:hover {
+    background: $color-attention !important;
+  }
+}
+
+.gm-attention {
+  background: $color-attention;
+
+  &:hover {
+    background: lighten($color-attention, 5%);
+  }
+
+  &:active,
+  &:focus {
+    background: lighten($color-attention, 10%);
+  }
+}
+
+.edit {
+  display: none;
+}
+
+.editable:hover {
+  .edit {
+    display: inline-block;
+  }
 }

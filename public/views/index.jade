@@ -1,7 +1,7 @@
 doctype html
 html
     head
-        title Gmot
+        title Gmoti
         meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=no")
         link(rel="stylesheet", href="/styles/main.css")
         include ../includes/scripts
@@ -9,26 +9,37 @@ html
     body(ng-app="app")
         include ../includes/currentUser
 
-        header.app-header(ng-controller="mvLoginCtrl")
-            div.container.cf
-                ul.main-nav.app-header__main-nav
-                    li.main-nav__item
-                        a.nav-link(href="/", ng-class="{'btn--attention': isNavActive('/')}") Home
-                    li.main-nav__item
-                        a.nav-link(href="/about", ng-class="{'btn--attention': isNavActive('/about')}") About
-                    li.main-nav__item(ng-show="identity.isAuthenticated()")
-                        a.nav-link(href="/tasks", ng-class="{'btn--attention': isNavActive('/tasks')}") Tasks
-                    li.main-nav__item(ng-show="identity.isAuthenticated()")
-                        a.nav-link(href="/current-sprint", ng-class="{'btn--attention': isNavActive('/current-sprint')}") Sprint
+        header.navbar.navbar-default(ng-controller="mvLoginCtrl")
+            div.container
+                div.navbar-header
+                    button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-responsive-collapse")
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                div.navbar-collapse.collapse.navbar-responsive-collapse
+                    ul.nav.navbar-nav
+                        li
+                            a.gm-link-item(href="/", ng-class="{'btn--attention': isNavActive('/')}") Home
+                        li
+                            a.gm-link-item(href="/about", ng-class="{'btn--attention': isNavActive('/about')}") About
+                        li(ng-show="identity.isAuthenticated()")
+                            a.gm-link-item(href="/tasks", ng-class="{'btn--attention': isNavActive('/tasks')}") Tasks
+                        li(ng-show="identity.isAuthenticated()")
+                            a.gm-link-item(href="/current-sprint", ng-class="{'btn--attention': isNavActive('/current-sprint')}") Sprint
 
-                div.user-nav-wrap(ng-show="!identity.isAuthenticated()")
-                    a.meta-link(href="/register" ng-class="{'nav-link--active': isNavActive('/register')}") Sign up
-                div.meta-dropdown.user-nav-wrap(ng-show="identity.isAuthenticated()", outside-click)
-                    button.meta-dropdown__trigger.nav-link(ng-click="elemShown", ng-class="{'meta-dropdown--open': elemShown, 'nav-link--active': elemShown}") {{identity.currentUser.firstName}}
-                    ul.meta-dropdown__content.user-nav.app-header__user-nav(ng-show="elemShown")
-                        li.user-nav__item
-                            a.meta-nav-link(href="", ng-click="logout()") Sign out
-                        li.user-meta-nav__item
-                            a.meta-nav-link(href="/profile") Edit Profile
+                    div.navbar-right(ng-show="!identity.isAuthenticated()")
+                       a.navbar-btn.btn.btn-info(href="/register") Sign up
+
+                    ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
+                        li.dropdown
+                            a.gm-link-item.dropdown-toggle(href="#", data-toggle="dropdown") {{identity.currentUser.firstName}}
+                                b.caret
+                            ul.dropdown-menu
+                                li
+                                    a.gm-link-item(href="", ng-click="logout()") Sign out
+                                li.divider
+                                li
+                                    a.gm-link-item(href="/profile") Edit Profile
 
         div(ng-view)
+        footer

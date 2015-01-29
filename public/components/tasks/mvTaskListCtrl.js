@@ -27,10 +27,13 @@ angular.module('app').controller('mvTaskListCtrl', function($scope, mvNotifier, 
     };
 
     $scope.deleteTask = function(category, task, index){
-        mvTaskOps.deleteTask(task).then(function(){
-            mvNotifier.notify('The task is deleted');
-            category.tasks.splice(index, 1);
-        });
+        var deleteConfirmed = confirm('Sure?');
+        if(deleteConfirmed) {
+            mvTaskOps.deleteTask(task).then(function(){
+                mvNotifier.notify('The task is deleted');
+                category.tasks.splice(index, 1);
+            });
+        }
     };
 
     $scope.saveEditedTask = function(task){
@@ -51,9 +54,12 @@ angular.module('app').controller('mvTaskListCtrl', function($scope, mvNotifier, 
     };
 
     $scope.deleteCategory = function(category, index){
-        mvCategoryOps.deleteCategory(category).then(function(){
-            $scope.categories.splice(index, 1);
-            mvNotifier.notify('Your category is deleted!');
-        });
+        var deleteConfirmed = confirm('Sure?');
+        if(deleteConfirmed) {
+            mvCategoryOps.deleteCategory(category).then(function(){
+                $scope.categories.splice(index, 1);
+                mvNotifier.notify('Your category is deleted!');
+            });
+        }
     }
 });
