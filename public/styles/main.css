@@ -8823,6 +8823,12 @@ button.toast-close-button {
 .gm-hours__item:last-child {
   border-right: 1px solid #464545;
 }
+@media (max-width: 768px) {
+  .gm-hours__item {
+    width: 40px;
+    height: 40px;
+  }
+}
 
 .gm-hours__item--done {
   background: #258cd1;

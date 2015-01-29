@@ -83,6 +83,11 @@
   &:last-child {
     border-right: 1px solid #464545;
   }
+
+  @media(max-width: $mobile){
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .gm-hours__item--done {
