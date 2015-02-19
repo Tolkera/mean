@@ -1,4 +1,4 @@
-angular.module('app').factory('mvSprintOps', function($http, $q, mvSprint, mvIdentity, mvUser){
+angular.module('app').factory('mvSprintOps', function($http, $q, mvSprint, mvIdentity, mvUser, mvSprintTask){
     return {
         addSprint: function(sprintData){
             var dfd = $q.defer();
@@ -27,7 +27,7 @@ angular.module('app').factory('mvSprintOps', function($http, $q, mvSprint, mvIde
         finishSprint: function(){
             var dfd = $q.defer();
             var sprint = new mvSprint({id: mvIdentity.currentUser.currentSprint});
-            sprint.$delete().then(function(res){
+            sprint.$delete({finished: false}).then(function(res){
                 mvIdentity.currentUser = new mvUser(res);
                 dfd.resolve();
             }, function(){
@@ -45,8 +45,28 @@ angular.module('app').factory('mvSprintOps', function($http, $q, mvSprint, mvIde
                 dfd.reject();
             });
             return dfd.promise;
+        },
+
+        updateTaskHours: function(data, id){
+            var dfd = $q.defer();
+            var sprint = new mvSprintTask(data);
+            sprint.$update({id: mvIdentity.currentUser.currentSprint, taskId: id}).then(function(){
+                dfd.resolve();
+            }, function(){
+                dfd.reject();
+            });
+            return dfd.promise;
+        },
+
+        editSprint: function(data){
+            var dfd = $q.defer();
+            var sprint = new mvSprint(data);
+            sprint.$update({id: mvIdentity.currentUser.currentSprint}).then(function(){
+                dfd.resolve();
+            }, function(){
+                dfd.reject();
+            });
+            return dfd.promise;
         }
-
-
     }
-})
+});

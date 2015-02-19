@@ -30,6 +30,18 @@ angular.module('app').factory('mvCategoryOps', function($http, $q, mvIdentity, m
                 dfd.reject(response.data.reason)
             });
             return dfd.promise;
-        }
+        },
+
+        /*getCategories: function(){
+            var dfd = $q.defer();
+            mvCategory.query().then(function(){
+                dfd.resolve(data);
+            }, function(response){
+                dfd.reject(response.data.reason)
+            });
+            return dfd.promise;
+        }*/
+
+
     }
 });

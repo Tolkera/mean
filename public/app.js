@@ -44,6 +44,11 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             controller: 'mvNewSprintCtrl',
             resolve: routeRoleChecker.user
         })
+        .when('/edit-sprint',{
+            templateUrl: '/components/sprints/edit-sprint',
+            controller: 'mvEditSprintCtrl',
+            resolve: routeRoleChecker.user
+        })
 
 });
 

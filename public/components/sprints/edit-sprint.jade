@@ -1,0 +1,31 @@
+div.container
+    header.gm-sptint__header.row
+        h2.col-sm-5 Edit Sprint
+        div.col-sm-3.gm-hours-counter
+            span.gm-hours-counter__text hours planned for this sprint
+            span.gm-hours-counter__hours {{hours}}
+    div.row
+        div.col-sm-8
+            ul.gm-add-sprint__categories.list-unstyled
+                li.gm-sprint__category.gm-category-item(ng-repeat="category in categories track by $index")
+                    header.new-sprint__category-header
+                        h3 {{category.name}}
+                    ul.list-group(ng-hide="category.close")
+                        li.list-group-item.row(ng-repeat="task in category.tasks track by $index")
+                            span.gm-add-sprint__task.col-xs-6(ng-click="selectTask(task)") {{task.name}}
+                            div.col-xs-6.text-right
+                                button.btn.gm-attention(ng-click="selectTask(task)", ng-hide="task.selectingTask ||task.planned ") Add to sprint
+                                span.text-success(ng-hide="task.selectingTask") {{task.planned}}
+                                form.form-inline(name="selectTaskForm", ng-show="task.selectingTask")
+                                    input.form-control.gm-task-hours__input.form-group(ng-model="task.planned")
+                                    button.btn.gm-attention.form-group(ng-click="addHours(task, category)") Add hours
+                                span.btn.btn-link(ng-click="deleteTask(task)", ng-show="task.selected") Remove from sprint
+            form.form-inline(name="deadlineForm")
+                div.form-group
+                    label(for="deadline") Deadline
+                    input.form-control.deadline-form__input( datepicker, ng-model="sprint.finish", name="deadline", id=deadline, required)
+            div.form-group
+            button.btn.gm-attention.btn-lg(ng-click="calculate()") Save Sprint!
+
+
+

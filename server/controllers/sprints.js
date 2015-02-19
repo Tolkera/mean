@@ -45,10 +45,8 @@ exports.finishSprint = function(req, res, next){
     })
 };
 
-exports.updateSprint = function(req, res, next){
-
+exports.updateTaskHours = function(req, res, next){
     var sprintData = req.body;
-
     Sprint.findOne({ _id: req.params.id}).exec(function(err, sprint){
         if (err){
             res.status(400);
@@ -56,20 +54,33 @@ exports.updateSprint = function(req, res, next){
         } else {
             sprint.contents.forEach(function(category){
                 category.tasks.forEach(function(task){
-                  if(task._id == sprintData._id) {
-                      task.spent = sprintData.spent;
-                      sprint.save(function(err){
-                          if(err){
-                              req.status(400);
-                              return res.send({reason: err.toString()})
-                          } else {
-                              res.send(req.user)
-                          }
-                      })
+                    if(task._id == req.params.taskId) {
+                        task.spent = sprintData.spent;
+                        sprint.save(function(err){
+                            if(err){
+                                req.status(400);
+                                return res.send({reason: err.toString()})
+                            } else {
+                                res.send(req.user)
+                            }
+                        })
 
-                  }
+                    }
                 })
             });
+        }
+    })
+};
+
+
+exports.editSprint = function(req, res, next){
+    var sprintData = req.body;
+    Sprint.update({ _id: req.params.id}, sprintData).exec(function(err, sprint){
+        if (err){
+            res.status(400);
+            return res.send({reason: err.toString()})
+        } else {
+           res.send(req.user);
         }
     })
 };

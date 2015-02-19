@@ -15,4 +15,4 @@ div.container.content
                             li.gm-hours__item(ng-repeat="hour in task.plan track by $index", ng-class="{'gm-hours__item--done' : hour.added}", ng-click="addHour(hour, task)")
         div.standard-margin
             button.btn.gm-attention(ng-click="finishSprint()") Finish this sprint
-            button.btn.btn-link(ng-click="deleteSprint()") Delete this sprint
+            a.btn.btn-link(href="/edit-sprint") Edit this sprint

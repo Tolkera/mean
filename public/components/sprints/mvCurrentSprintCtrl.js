@@ -1,4 +1,4 @@
-angular.module('app').controller('mvCurrentSprintCtrl', function($scope, mvNotifier, mvCategory, mvUser, mvSprintOps, mvIdentity, $location){
+angular.module('app').controller('mvCurrentSprintCtrl', function($scope, mvNotifier, mvCategory, mvUser, mvSprintOps, mvIdentity, mvSprintTask){
     $scope.currentSprint = mvIdentity.currentUser.currentSprint;
     if($scope.currentSprint){
         mvSprintOps.getCurrentSprint().then(function(data){
@@ -49,10 +49,11 @@ angular.module('app').controller('mvCurrentSprintCtrl', function($scope, mvNotif
         } else {
             --task.spent;
         }
-        mvSprintOps.updateSprint(task).then(function(){
+        var taskId = task._id;
+        mvSprintOps.updateTaskHours(task, taskId).then(function(){
             mvNotifier.notify('Saved!');
         }, function(){
             mvNotifier.notify('Sorry, there is some error');
-        })
+        });
     }
 });

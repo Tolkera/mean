@@ -22,10 +22,12 @@ module.exports = function(app){
     app.put('/api/categories/:id', categories.updateCategory);
     app.delete('/api/categories/:id', categories.deleteCategory);
 
+    app.put('/api/sprints/:id/tasks/:taskId', sprints.updateTaskHours);
+
     app.post('/api/sprints', sprints.addSprint);
     app.get('/api/sprints/:id', sprints.getCurrentSprint);
     app.delete('/api/sprints/:id', sprints.finishSprint);
-    app.put('/api/sprints/:id', sprints.updateSprint)
+    app.put('/api/sprints/:id', sprints.editSprint);
 
     app.post('/login', auth.authenticate);
     app.post('/logout', function(req, res){
