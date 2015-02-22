@@ -1,6 +1,6 @@
-angular.module('app').controller('mvNewSprintCtrl', function($scope, mvNotifier, mvCategory, mvSprintOps, $location){
+angular.module('app').controller('mvNewSprintCtrl', function($scope, mvNotifier, mvCategory, mvSprintOps, $location, tasks){
 
-    $scope.categories = mvCategory.query();
+    $scope.categories = tasks;
     $scope.newSprintData = {};
     $scope.selectTask = function(task){
         task.selectingTask = ! task.selectingTask;

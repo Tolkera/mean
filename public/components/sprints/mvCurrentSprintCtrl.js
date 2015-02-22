@@ -1,34 +1,31 @@
-angular.module('app').controller('mvCurrentSprintCtrl', function($scope, mvNotifier, mvCategory, mvUser, mvSprintOps, mvIdentity, mvSprintTask){
+angular.module('app').controller('mvCurrentSprintCtrl', function($scope, mvNotifier, mvCategory, mvUser, mvSprintOps, mvIdentity, mvSprintTask, sprint){
     $scope.currentSprint = mvIdentity.currentUser.currentSprint;
     if($scope.currentSprint){
-        mvSprintOps.getCurrentSprint().then(function(data){
-            $scope.sprint = data;
-            $scope.sprint.contents.forEach(function(category){
-                category.tasks.forEach(function(task){
-                    task.plan = [];
-                    for (var i = 0; i<task.planned; i++){
-                        var hour = {};
-                        if(i<task.spent){
-                            hour.added = true;
-                        }
-                        task.plan.push(hour)
+        $scope.sprint = sprint;
+        $scope.sprint.contents.forEach(function(category){
+            category.tasks.forEach(function(task){
+                task.plan = [];
+                for (var i = 0; i<task.planned; i++){
+                    var hour = {};
+                    if(i<task.spent){
+                        hour.added = true;
                     }
-                })
-            });
+                    task.plan.push(hour)
+                }
+            })
 
-            $scope.currentDate = new Date();
-            $scope.finish = new Date($scope.sprint.finish);
+        $scope.currentDate = new Date();
+        $scope.finish = new Date($scope.sprint.finish);
 
-            $scope.deadlineMessage = 'Your deadline is ' + moment($scope.finish).format("MMM Do dddd") + ', ' + moment($scope.finish).fromNow();
+        $scope.deadlineMessage = 'Your deadline is ' + moment($scope.finish).format("MMM Do dddd") + ', ' + moment($scope.finish).fromNow();
 
-            if ($scope.currentDate > $scope.finish){
-                $scope.deadlineMessage = 'You missed your deadline, bastard!'
-            } else if ($scope.currentDate > $scope.finish) {
-                $scope.deadlineMessage = 'Today is your deadline!'
-            }
+        if ($scope.currentDate > $scope.finish){
+            $scope.deadlineMessage = 'You missed your deadline, bastard!'
+        } else if ($scope.currentDate > $scope.finish) {
+            $scope.deadlineMessage = 'Today is your deadline!'
+        }
         });
     }
-
 
     $scope.finishSprint = function(){
         var deleteConfirmed = confirm('Sure?');

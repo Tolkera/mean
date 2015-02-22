@@ -32,22 +32,45 @@ angular.module('app').config(function($routeProvider, $locationProvider){
         .when('/tasks',{
             templateUrl: '/components/tasks/task-list',
             controller: 'mvTaskListCtrl',
-            resolve: routeRoleChecker.user
+            resolve: {
+                auth: routeRoleChecker.user.auth,
+                tasks: function(mvCategory){
+                    return mvCategory.query();
+                }
+            }
         })
         .when('/current-sprint',{
             templateUrl: '/components/sprints/current-sprint',
             controller: 'mvCurrentSprintCtrl',
-            resolve: routeRoleChecker.user
+            resolve: {
+                auth: routeRoleChecker.user.auth,
+                sprint: function(mvSprintOps){
+                    return mvSprintOps.getCurrentSprint();
+                }
+            }
         })
         .when('/add-sprint',{
             templateUrl: '/components/sprints/add-sprint',
             controller: 'mvNewSprintCtrl',
-            resolve: routeRoleChecker.user
+            resolve: {
+                auth: routeRoleChecker.user.auth,
+                tasks: function(mvCategory){
+                    return mvCategory.query();
+                }
+            }
         })
         .when('/edit-sprint',{
             templateUrl: '/components/sprints/edit-sprint',
             controller: 'mvEditSprintCtrl',
-            resolve: routeRoleChecker.user
+            resolve: {
+                auth: routeRoleChecker.user.auth,
+                sprint: function(mvSprintOps){
+                    return mvSprintOps.getCurrentSprint();
+                },
+                tasks: function(mvCategory){
+                    return mvCategory.query();
+                }
+            }
         })
 
 });

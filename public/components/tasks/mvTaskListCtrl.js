@@ -1,4 +1,4 @@
-angular.module('app').controller('mvTaskListCtrl', function($scope, mvNotifier, mvTaskOps, mvTask, mvCategory, mvCategoryOps){
+angular.module('app').controller('mvTaskListCtrl', function($scope, mvNotifier, mvTaskOps, mvTask, mvCategory, mvCategoryOps, tasks){
 
     var successMessages = [
         'Good job!',
@@ -15,7 +15,7 @@ angular.module('app').controller('mvTaskListCtrl', function($scope, mvNotifier, 
         return successMessages[Math.floor(Math.random()*successMessages.length)]
     };
 
-   $scope.categories = mvCategory.query();
+   $scope.categories = tasks;
 
    $scope.addTask = function(category, newTask){
        var taskData = {name: newTask, date: new Date(), done: false, category: category._id};

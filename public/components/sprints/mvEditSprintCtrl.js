@@ -1,44 +1,41 @@
-angular.module('app').controller('mvEditSprintCtrl', function($scope, mvNotifier, mvCategory, mvSprintOps, $location){
+angular.module('app').controller('mvEditSprintCtrl', function($scope, mvNotifier, mvSprintOps, $location, tasks, sprint){
 
     $scope.selectTask = function(task){
         task.selectingTask = ! task.selectingTask;
     };
 
-    mvSprintOps.getCurrentSprint().then(function(data){
-        $scope.sprint = data;
-        $scope.sprint.contents.forEach(function(category){
-            category.tasks.forEach(function(task){
-                task.plan = [];
-                for (var i = 0; i<task.planned; i++){
-                    var hour = {};
-                    if(i<task.spent){
-                        hour.added = true;
-                    }
-                    task.plan.push(hour)
-                }
-            })
-        });
-        var categories = mvCategory.query();
+    var categories = tasks;
+    $scope.sprint = sprint;
 
-        categories.$promise.then(function(data){
-            $scope.sprint.contents.forEach(function(sprintCategory){
-                sprintCategory.tasks.forEach(function(sprintTask){
-                    categories.forEach(function(category, categoryIndex){
-                        category.tasks.forEach(function(task, taskIndex){
-                            if (task._id == sprintTask.taskInfo._id){
-                                categories[categoryIndex].tasks[taskIndex].planned = sprintTask.planned;
-                                categories[categoryIndex].tasks[taskIndex].spent = sprintTask.spent;
-                                categories[categoryIndex].tasks[taskIndex].selected = true;
-                            }
-                        })
-                    })
-                })
-            })
-            $scope.categories = categories;
-            calculateHours();
+    $scope.sprint.contents.forEach(function(category){
+        category.tasks.forEach(function(task){
+            task.plan = [];
+            for (var i = 0; i<task.planned; i++){
+                var hour = {};
+                if(i<task.spent){
+                    hour.added = true;
+                }
+                task.plan.push(hour)
+            }
         })
     });
 
+    $scope.sprint.contents.forEach(function(sprintCategory){
+        sprintCategory.tasks.forEach(function(sprintTask){
+            categories.forEach(function(category, categoryIndex){
+                category.tasks.forEach(function(task, taskIndex){
+                    if (task._id == sprintTask.taskInfo._id){
+                        categories[categoryIndex].tasks[taskIndex].planned = sprintTask.planned;
+                        categories[categoryIndex].tasks[taskIndex].spent = sprintTask.spent;
+                        categories[categoryIndex].tasks[taskIndex].selected = true;
+                    }
+                })
+            })
+        })
+
+        $scope.categories = categories;
+        calculateHours();
+    })
 
     function calculateHours(){
         $scope.hours = 0;
