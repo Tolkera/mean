@@ -44,7 +44,6 @@ exports.deleteTask = function(req, res, next){
             req.status(400);
             return res.send({reason: err.toString()})
         } else {
-            console.log(collection);
             res.send(req.user)
         }
     });
