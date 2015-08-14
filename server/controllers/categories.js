@@ -18,14 +18,13 @@ exports.createCategory = function(req, res, next){
 };
 
 exports.getCategories = function(req, res, next){
-
-    User.findOne({_id: req.user._id}).exec(function(err, user){
+    User.findOne({_id: req.query.userId}).exec(function(err, user){
         if(err){
             return res.send({reason: err.toString()})
         } else {
-             Category.find({_id : {$in: user.categories}}).populate('tasks').exec(function(err, categories){
-                 res.send(categories);
-             })
+            Category.find({_id : {$in: user.categories}}).populate('tasks').exec(function(err, categories){
+                res.send(categories);
+            })
         }
     });
 };

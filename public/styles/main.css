@@ -8245,6 +8245,18 @@ footer {
   display: inline-block;
 }
 
+.in-bl {
+  display: inline-block;
+}
+
+.margin-s {
+  margin-top: 10px;
+}
+
+.margin-m {
+  margin-top: 20px;
+}
+
 .toast-title {
   font-weight: bold;
 }
@@ -8735,7 +8747,7 @@ button.toast-close-button {
 }
 
 .gm-task-hours__input.form-control {
-  width: 50px;
+  width: 70px;
   margin-right: 10px;
   display: inline-block;
 }

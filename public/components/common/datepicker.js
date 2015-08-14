@@ -1,3 +1,4 @@
+/*
 angular.module('app').directive('datepicker', function () {
     return {
         restrict: 'A',
@@ -12,4 +13,4 @@ angular.module('app').directive('datepicker', function () {
             });
         }
     };
-});
+});*/

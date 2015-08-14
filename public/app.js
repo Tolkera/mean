@@ -1,4 +1,4 @@
-angular.module('app',['ngResource', 'ngRoute', 'ngMessages'] );
+angular.module('app',['ngResource', 'ngRoute', 'ngMessages', 'ui.bootstrap'] );
 
 angular.module('app').config(function($routeProvider, $locationProvider){
 
@@ -34,8 +34,8 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             controller: 'mvTaskListCtrl',
             resolve: {
                 auth: routeRoleChecker.user.auth,
-                tasks: function(mvCategory){
-                    return mvCategory.query();
+                tasks: function(mvCategory, mvIdentity){
+                    return mvCategory.query({userId: mvIdentity.currentUser._id});
                 }
             }
         })
@@ -44,8 +44,11 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             controller: 'mvCurrentSprintCtrl',
             resolve: {
                 auth: routeRoleChecker.user.auth,
-                sprint: function(mvSprintOps){
-                    return mvSprintOps.getCurrentSprint();
+                sprint: function(mvSprintOps, mvIdentity){
+                    if (mvIdentity.currentUser.currentSprint) {
+                        return mvSprintOps.getCurrentSprint();
+                    }
+                    return false;
                 }
             }
         })

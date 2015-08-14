@@ -1,5 +1,6 @@
 var User = require('mongoose').model('User'),
-    Sprint = require('mongoose').model('Sprint');
+    Sprint = require('mongoose').model('Sprint'),
+    Task = require('mongoose').model('Task');
 
 exports.addSprint = function(req, res, next){
     var sprintData = req.body;
@@ -17,6 +18,14 @@ exports.addSprint = function(req, res, next){
                 } else {
                     res.send(sprint)
                 }
+            });
+            sprintData.tasks.forEach(function(task){
+                Task.update({ _id: task._id}, {$set: {"sprint.current": true, "sprint.planned": task.planned}}).exec(function(err, task){
+                    if (err){
+                        res.status(400);
+                        return res.send({reason: err.toString()})
+                    }
+                })
             })
         }
     })
@@ -24,7 +33,7 @@ exports.addSprint = function(req, res, next){
 
 exports.getCurrentSprint = function(req, res, next){
     var sprintId = req.params.id;
-    Sprint.findOne({_id: sprintId}).populate('contents.tasks.taskInfo contents.categoryInfo').exec(function(err, sprint){
+    Sprint.findOne({_id: sprintId}).populate('tasks').exec(function(err, sprint){
         if (err){
             res.status(400);
             return res.send({reason: err.toString()})
@@ -35,39 +44,43 @@ exports.getCurrentSprint = function(req, res, next){
 };
 
 exports.finishSprint = function(req, res, next){
+
     User.update({ _id: req.user._id}, {$unset: {currentSprint: ""}}).exec(function(err, user){
         if (err){
             res.status(400);
             return res.send({reason: err.toString()})
         } else {
-            res.send(req.user)
+            Sprint.findOne({_id: req.params.id}).exec(function(err, sprint){
+                if(err){
+                    res.status(400);
+                    return res.send({reason: err.toString()})
+                }
+                sprint.tasks.forEach(function(task){
+                    Task.update({_id: task}, {$set: {
+                        "sprint.current": false,
+                        "sprint.spent": 0,
+                        "sprint.planned": 0
+                    }
+                    }).exec(function(err, task){
+                        if(err){
+                            res.status(400);
+                            return res.send({reason: err.toString()})
+                        }
+                        res.send(req.user);
+                    });
+                });
+            });
         }
     })
 };
 
 exports.updateTaskHours = function(req, res, next){
-    var sprintData = req.body;
-    Sprint.findOne({ _id: req.params.id}).exec(function(err, sprint){
+    Task.update({ _id: req.body._id}, {$set: {"sprint.spent": req.body.sprint.spent}}).exec(function(err, task){
         if (err){
             res.status(400);
             return res.send({reason: err.toString()})
         } else {
-            sprint.contents.forEach(function(category){
-                category.tasks.forEach(function(task){
-                    if(task._id == req.params.taskId) {
-                        task.spent = sprintData.spent;
-                        sprint.save(function(err){
-                            if(err){
-                                req.status(400);
-                                return res.send({reason: err.toString()})
-                            } else {
-                                res.send(req.user)
-                            }
-                        })
-
-                    }
-                })
-            });
+            res.send(task);
         }
     })
 };

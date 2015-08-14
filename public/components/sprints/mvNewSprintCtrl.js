@@ -1,75 +1,48 @@
-angular.module('app').controller('mvNewSprintCtrl', function($scope, mvNotifier, mvCategory, mvSprintOps, $location, tasks){
+angular.module('app').controller('mvNewSprintCtrl', function($scope, mvNotifier, mvCategory, mvSprintOps, $location, tasks) {
 
     $scope.categories = tasks;
-    $scope.newSprintData = {};
-    $scope.selectTask = function(task){
-        task.selectingTask = ! task.selectingTask;
-    };
+
     $scope.hours = 0;
-    $scope.submitDisabled = function(){
-        return $scope.hours == 0;
+    $scope.minDate = new Date();
+    $scope.date = moment($scope.minDate).add(2, 'weeks').format();
+
+    var sprintData = {
+        tasks: [],
+        created: new Date()
     };
-    $scope.addHours = function(task, category){
-        task.selectingTask = false;
+
+    function updateHours(){
         $scope.hours = 0;
-        $scope.categories.forEach(function(element){
-            element.tasks.forEach(function(element){
-                if(element.taskHours){
-                    $scope.hours += +element.taskHours;
-                }
-            })
-        });
-        task.added = true;
-        $scope.submitDisabled();
-    };
-
-    $scope.deleteTask = function(task){
-        task.taskHours = "";
-        $scope.addHours(task);
-        $scope.submitDisabled();
-        task.added = false;
-    };
-
-    $scope.calculate = function(){
-
-        var sprintData = {
-            created: new Date(),
-            current: true,
-            contents: [],
-            finish: $scope.date
-        };
-
-        $scope.categories.forEach(function(category){
-           if(category.tasks.some(checkAdded)){
-
-               var categoryItem = {
-                   categoryInfo: category._id,
-                   tasks: []
-               };
-
-               category.tasks.forEach(function(task){
-                   if(task.added){
-                       var taskItem = {
-                           taskInfo: task._id,
-                           planned: task.taskHours,
-                           spent: 0
-                       };
-                       categoryItem.tasks.push(taskItem)
-                   }
-               });
-               sprintData.contents.push(categoryItem);
-           }
-        });
-
-        function checkAdded(element){
-            return element.added;
-        }
-
-        mvSprintOps.addSprint(sprintData).then(function(){
-            mvNotifier.notify('Your new sprint is created');
-            $location.path('/current-sprint');
-        }, function(){
-            mvNotifier.notify('Sorry, there is some error');
+        _.each(sprintData.tasks, function(item){
+            $scope.hours += item.planned;
         })
     }
+
+    $scope.addTask = function(task){
+        if ( task.planned && !isNaN(task.planned)) {
+            sprintData.tasks.push({_id:  task._id, planned: task.planned});
+            task.selecting = false;
+            task.added = true;
+            updateHours();
+        }
+    };
+
+    $scope.deleteTask = function(task, index){
+        sprintData.tasks.splice(index, 1);
+        task.added = false;
+        task.planned = "";
+        updateHours();
+    };
+
+    $scope.createSprint = function(){
+        sprintData.finish = $scope.date;
+        console.log(sprintData);
+
+        mvSprintOps.addSprint(sprintData).then(function () {
+            mvNotifier.notify('Your new sprint is created');
+            $location.path('/current-sprint');
+        }, function () {
+            mvNotifier.notify('Sorry, there is some error');
+        })
+    };
 });
