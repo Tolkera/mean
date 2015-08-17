@@ -1,11 +1,11 @@
 div.container
     header.gm-sptint__header.row
-        h2.col-sm-5 Edit Sprint
-        div.col-sm-3.gm-hours-counter
+        h2.col-xs-7 Edit Sprint
+        div.col-lg-3.col-sm-5.gm-hours-counter
             span.gm-hours-counter__text hours planned for this sprint
             span.gm-hours-counter__hours {{hours}}
     div.row
-        div.col-sm-8
+        div.col-lg-8
             ul.gm-add-sprint__categories.list-unstyled
                 li.gm-sprint__category.gm-category-item(ng-repeat="category in categories track by $index")
                     header.new-sprint__category-header
@@ -14,18 +14,24 @@ div.container
                         li.list-group-item.row(ng-repeat="task in category.tasks track by $index")
                             span.gm-add-sprint__task.col-xs-6(ng-click="selectTask(task)") {{task.name}}
                             div.col-xs-6.text-right
-                                button.btn.gm-attention(ng-click="selectTask(task)", ng-hide="task.selectingTask ||task.planned ") Add to sprint
-                                span.text-success(ng-hide="task.selectingTask") {{task.planned}}
-                                form.form-inline(name="selectTaskForm", ng-show="task.selectingTask")
-                                    input.form-control.gm-task-hours__input.form-group(ng-model="task.planned")
+                                button.btn.gm-attention(ng-click="task.selecting = !task.selecting", ng-hide="task.selecting ||task.sprint.current ") Add to sprint
+                                span.text-success(ng-if="task.sprint.current") {{task.sprint.planned}}
+                                form.form-inline(name="selectTaskForm", ng-show="task.selecting")
+                                    input.form-control.gm-task-hours__input.form-group(ng-model="task.sprint.planned", type="number", min="1")
                                     button.btn.gm-attention.form-group(ng-click="addHours(task, category)") Add hours
-                                span.btn.btn-link(ng-click="deleteTask(task)", ng-show="task.selected") Remove from sprint
-            form.form-inline(name="deadlineForm")
-                div.form-group
-                    label(for="deadline") Deadline
-                    input.form-control.deadline-form__input( datepicker, ng-model="sprint.finish", name="deadline", id=deadline, required)
-            div.form-group
-            button.btn.gm-attention.btn-lg(ng-click="calculate()") Save Sprint!
+                                    button.btn.form-group(ng-click="task.selecting = false; task.planned = ''") Cancel
+                                span.btn.btn-link(ng-click="deleteTask(task)", ng-if="task.sprint.planned && !task.selecting") Remove from sprint
+            form.form-inline(name="deadlineForm" ng-if="categories.length")
+                div.row
+                    div.col-sm-6
+                        label(for="deadline" class="in-bl margin-right-m va-middle") Deadline: {{dates.finish | date}}
+                        div.margin-m
+                            button.btn.gm-attention.btn-lg(ng-click="saveSprint()", ng-disabled="!hours") Save sprint!
+                            a.btn.btn-link(ng-href="/current-sprint") Cancel
+
+
+                    div.col-sm-6
+                        datepicker(ng-model="dates.finish" min-date="dates.minDate" show-weeks="true" class="well well-sm in-bl gm-sprint__calendar")
 
 
 

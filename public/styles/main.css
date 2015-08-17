@@ -8257,6 +8257,18 @@ footer {
   margin-top: 20px;
 }
 
+.margin-right-s {
+  margin-right: 10px;
+}
+
+.margin-right-m {
+  margin-right: 20px;
+}
+
+.va-middle {
+  vertical-align: middle;
+}
+
 .toast-title {
   font-weight: bold;
 }
@@ -8770,11 +8782,6 @@ button.toast-close-button {
   margin-top: 10px;
   text-align: right;
 }
-@media (max-width: 768px) {
-  .gm-hours-counter {
-    text-align: left;
-  }
-}
 
 .gm-hours-counter__text {
   font-size: 13px;
@@ -8844,6 +8851,15 @@ button.toast-close-button {
 
 .gm-hours__item--done {
   background: #258cd1;
+}
+
+.gm-sprint__calendar {
+  float: right;
+}
+@media (max-width: 768px) {
+  .gm-sprint__calendar {
+    float: none;
+  }
 }
 
 /*! jQuery UI - v1.11.2 - 2014-10-16

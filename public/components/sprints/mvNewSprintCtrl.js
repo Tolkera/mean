@@ -3,8 +3,11 @@ angular.module('app').controller('mvNewSprintCtrl', function($scope, mvNotifier,
     $scope.categories = tasks;
 
     $scope.hours = 0;
-    $scope.minDate = new Date();
-    $scope.date = moment($scope.minDate).add(2, 'weeks').format();
+
+    $scope.dates = {
+        minDate: new Date(),
+        finish: moment($scope.minDate).add(2, 'weeks').format(),
+    };
 
     var sprintData = {
         tasks: [],
@@ -35,9 +38,7 @@ angular.module('app').controller('mvNewSprintCtrl', function($scope, mvNotifier,
     };
 
     $scope.createSprint = function(){
-        sprintData.finish = $scope.date;
-        console.log(sprintData);
-
+        sprintData.finish = $scope.dates.finish;
         mvSprintOps.addSprint(sprintData).then(function () {
             mvNotifier.notify('Your new sprint is created');
             $location.path('/current-sprint');

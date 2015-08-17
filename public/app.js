@@ -68,10 +68,14 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             resolve: {
                 auth: routeRoleChecker.user.auth,
                 sprint: function(mvSprintOps){
-                    return mvSprintOps.getCurrentSprint();
+                    return mvSprintOps.getCurrentSprint().then(function(data){
+                        return data
+                    });
                 },
                 tasks: function(mvCategory){
-                    return mvCategory.query();
+                    return mvCategory.query().$promise.then(function(tasks){
+                        return tasks;
+                    });
                 }
             }
         })

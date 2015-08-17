@@ -2,3 +2,5 @@ node_modules
 .idea
 .sass-cache
 public/vendor
+public/styles/*.css
+public/styles/*.css.map

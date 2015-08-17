@@ -1,6 +1,7 @@
 var User = require('mongoose').model('User'),
     Sprint = require('mongoose').model('Sprint'),
-    Task = require('mongoose').model('Task');
+    Task = require('mongoose').model('Task'),
+    _ = require('underscore');
 
 exports.addSprint = function(req, res, next){
     var sprintData = req.body;
@@ -66,13 +67,14 @@ exports.finishSprint = function(req, res, next){
                             res.status(400);
                             return res.send({reason: err.toString()})
                         }
-                        res.send(req.user);
                     });
                 });
+                return res.send(req.user);
             });
         }
     })
 };
+
 
 exports.updateTaskHours = function(req, res, next){
     Task.update({ _id: req.body._id}, {$set: {"sprint.spent": req.body.sprint.spent}}).exec(function(err, task){
@@ -87,14 +89,47 @@ exports.updateTaskHours = function(req, res, next){
 
 
 exports.editSprint = function(req, res, next){
-    var sprintData = req.body;
+
+    var sprintData = {
+        created: req.body.created,
+        finish: req.body.finish,
+        tasks: _.pluck(req.body.tasks, '_id')
+    };
+    var tasks = req.body.tasks;
+
     Sprint.update({ _id: req.params.id}, sprintData).exec(function(err, sprint){
         if (err){
             res.status(400);
             return res.send({reason: err.toString()})
         } else {
+            _.each(tasks, function(task){
+                Task.update({_id: task._id}, {$set: {
+                    "sprint.current": true,
+                    "sprint.planned": task.sprint.planned
+                }
+                }).exec(function(err, task){
+                    if(err){
+                        res.status(400);
+                        return res.send({reason: err.toString()})
+                    }
+                });
+            });
+            _.each(req.body.removedTasks, function(task){
+                Task.update({_id: task}, {$set: {
+                    "sprint.current": false,
+                    "sprint.planned": 0,
+                    "sprint.spent": 0
+                }
+                }).exec(function(err, task){
+                    if(err){
+                        res.status(400);
+                        return res.send({reason: err.toString()})
+                    }
+                });
+            });
            res.send(req.user);
         }
     })
+
 };
 

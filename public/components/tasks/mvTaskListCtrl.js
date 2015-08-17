@@ -18,7 +18,7 @@ angular.module('app').controller('mvTaskListCtrl', function($scope, mvNotifier, 
    $scope.categories = tasks;
 
    $scope.addTask = function(category, newTask){
-       var taskData = {name: newTask, date: new Date(), done: false, category: category._id};
+       var taskData = {name: newTask, created: new Date(), done: false, category: category._id};
        mvTaskOps.createTask(taskData).then(function(data){
            category.tasks.push(data);
            category.newTask = "";

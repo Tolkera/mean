@@ -29,7 +29,7 @@ div.container
                                     div.form-error(ng-messages="taskEditForm.taskName.$error")
                                         span(ng-message="required") This shouldn't be empty!
                             div.gm-task__details.col-md-6.text-right
-                                span.text-muted Created on {{task.date |date }}
+                                span.text-muted Created on {{task.created |date }}
                                 button.gm-task__details-delete(ng-click="deleteTask(category, task, $index)") Delete
                     div.gm-add-task
                         button.btn.gm-add-task__sign

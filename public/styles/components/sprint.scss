@@ -20,10 +20,6 @@
 .gm-hours-counter {
   margin-top: 10px;
   text-align: right;
-
-  @media(max-width: $mobile){
-    text-align: left;
-  }
 }
 
 .gm-hours-counter__text {
@@ -92,4 +88,12 @@
 
 .gm-hours__item--done {
   background: $color-branding--light;
+}
+
+.gm-sprint__calendar {
+  float: right;
+
+  @media(max-width: $mobile){
+    float: none;
+  }
 }

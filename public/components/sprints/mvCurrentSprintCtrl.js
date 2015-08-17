@@ -31,7 +31,7 @@ angular.module('app').controller('mvCurrentSprintCtrl', function($scope, mvNotif
             if(deleteConfirmed) {
                 mvSprintOps.finishSprint().then(function(){
                     mvNotifier.notify('Your sprint is finished! Congrats!');
-                    $scope.currentSprint = false;
+                    $scope.sprint = false;
                 }, function(){
                     mvNotifier.notify('Sorry, there is some error');
                 })

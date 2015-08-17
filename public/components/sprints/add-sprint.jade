@@ -25,10 +25,10 @@ div.container
                 div.row
                     div.col-lg-6
                         div.form-group.cf
-                            label(for="deadline" class="pull-left") Deadline: {{date | date}}
+                            label(for="deadline" class="pull-left") Deadline: {{dates.finish | date}}
                             button.btn.gm-attention.btn-lg.margin-m(ng-click="createSprint()", ng-disabled="!hours") Create a new sprint!
 
                     div.col-lg-6
-                        datepicker(ng-model="date" min-date="minDate" show-weeks="true" class="well well-sm in-bl pull-right")
+                        datepicker(ng-model="dates.finish" min-date="dates.minDate" show-weeks="true" class="well well-sm in-bl pull-right")
 
 
